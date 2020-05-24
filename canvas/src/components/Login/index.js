@@ -27,7 +27,7 @@ const LogIn = ({
 
     return (
         <Fragment>
-            <div className='container'>
+            <div className='container'> 
                 <div className='login-container'>
                     <div className='login-header'>
                         <div className='establishment-logo'></div>

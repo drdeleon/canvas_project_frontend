@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
-
-.container {
-    background-image: url('../../assets/images/CIT-front.jpg');
+body {
+    margin: 0px 0px;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/images/CIT-back.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    max-width: 500px;
-    max-width: 900px;
+    min-height: 100vh;
 }
 
 .login-container {
@@ -16,6 +22,7 @@
     height: 537px;
     width: 400px;
     background-color: #009444;
+    display: inline-block;
 }
 
 .establishment-logo {
