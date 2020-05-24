@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+.container {
+    background-image: url('../../assets/images/CIT-front.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    max-width: 500px;
+    max-width: 900px;
+}
+
+.login-container {
+    align-items: center;
+    height: 537px;
+    width: 400px;
+    background-color: #009444;
+}
+
+.establishment-logo {
+    background-image: url('../../assets/images/UVG-logo-h.png');
+    background-size: 300px 120px;
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 300px;
+    background-position: center;
+    padding: 25px 50px;
+}
+
+.login-content {
+    padding: 10px 25px;
+}
+
+.input-indicator {
+    color: white;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+input {
+    width: 350px;
+    border-radius: 5px;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0px 0px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+
+.login-button {
+    margin: 20px 100px;
+    border-radius: 5px;
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    height: 40px;
+    width: 150px;
+}
+
+button {
+    cursor: pointer;
+    border-width: 1px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
