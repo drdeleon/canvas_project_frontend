@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 
 
-import Test from '../Test';
+import NavBar from '../NavBar';
 import LogIn from '../Login';
 import { createBrowserHistory } from 'history';
 
@@ -26,6 +26,7 @@ const App = () => (
         <Switch>
             <Redirect exact from='/' to='/login' />
             <Route exact path='/login' component={LogIn} />
+            <Route exact path='/others' component={NavBar} />
         </Switch>
       </PersistGate>
     </Router>
