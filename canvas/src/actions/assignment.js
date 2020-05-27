@@ -91,10 +91,10 @@ export const startSubmittingAssignment = (id, assignment) => ({
     },
 });
 
-export const completeSubmittingAssignment = id  => ({
+export const completeSubmittingAssignment = assignment  => ({
     type: types.ASSIGNMENT_SUBMIT_COMPLETED,
     payload: {
-        id,
+        assignment,
     },
 });
 
