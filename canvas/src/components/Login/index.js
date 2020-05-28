@@ -1,11 +1,8 @@
 // improt { v4 as uuidv4 } from 
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-    Link,
-    useHistory, 
-    withRouter
-} from 'react-router-dom';
+import { Link, useHistory, withRouter } from 'react-router-dom';
+import { Field, reduxForm, Form } from 'redux-form';
 
 
 import './styles.css';
@@ -14,16 +11,31 @@ import * as selectors from '../../reducers';
 import { select } from 'redux-saga/effects';
 import { history } from '../App';
 
+const renderInput = ({ input, label, type, meta: { touched, error} }) => (
+    <Fragment>
+        <div>
+            <label>{label}</label>
+            <div>
+                <input 
+                    {...input} 
+                    placeholder={label} 
+                    type={type}
+                />
+                { touched &&
+                        (error && <span>{error}</span>)
+                }
+            </div>
+        </div>
+    </Fragment>
+)
+
 const LogIn = ({
-    onSubmit, 
+    handleSubmit, 
     isLoading,
     error = null,
     isAuthenticated = false,
-    authUsername = ','
+    authUsername = ''
 }) => {
-
-    const [username, changeUsername] = useState('');
-    const [password, changePassword] = useState('');
 
     return (
         <Fragment>
@@ -32,50 +44,31 @@ const LogIn = ({
                     <div className='login-header'>
                         <div className='establishment-logo'></div>
                         <div className='login-content'>
-                            <p>
-                                <label className='input-indicator'>
-                                    <strong>{'Correo electrónico'}</strong>
-                                </label>
-                            </p>
-                            <p>
-                                <input
-                                    type="email"
-                                    value={username}
-                                    onChange={e => changeUsername(e.target.value)}
+                            <Form onSubmit={handleSubmit}>
+                                <Field 
+                                    name= "email"
+                                    type= "text"
+                                    component = { renderInput }
+                                    label= "Correo electrónico"
+                                />               
+                                <Field 
+                                    name= "password"
+                                    type= "password"
+                                    component = { renderInput }
+                                    label= "Contraseña"
                                 />
-                            </p>
-                            <p>
-                                <label className='input-indicator'>
-                                    <strong>{'Contraseña'}</strong>
-                                </label>
-                            </p>
-                            <p>
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={e => changePassword(e.target.value)}
-                                    onKeyDown={
-                                        e => {
-                                            if(e.key ==='Enter') {
-                                                onSubmit(username, password);
-                                            }
-                                        }
+                                <p>
+                                    {
+                                        isLoading ? (
+                                            <stromg>{'Cargando...'}</stromg>
+                                        ) : (
+                                            <button className="login-button" type="submit">
+                                                {'Iniciar sesión'}
+                                            </button>
+                                        )
                                     }
-                                />
-                            </p>
-                            <p>
-                                {
-                                    isLoading ? (
-                                        <stromg>{'Cargando...'}</stromg>
-                                    ) : (
-                                        <button className="login-button" type="submit" onClick={
-                                            () => onSubmit(username, password)
-                                        }>
-                                            {'Iniciar sesión'}
-                                        </button>
-                                    )
-                                }
-                            </p>
+                                </p>
+                            </Form>
                         </div>
                     </div>
                 </div>
@@ -91,21 +84,23 @@ export default connect(
         isAuthenticated: selectors.getIsAuthenticated(state),
         authUsername: selectors.getAuthUsername(state),
     }),
-    dispatch => ({
-        onSubmit(username, password) {
-            if (username.includes('@') && password !== '') {
-                history.push('./login');
-                dispatch(actions.startLogin(username, password));
-                console.log(username, password);
-           } else {
-               if( !username.includes('@') && username !== '') {
-                   alert('El correo con el que se está intentando ingresar es inválido');
-               } else {
-                alert('Por favor llenar todos los campos');
-               }
-
-            }
+)(
+    reduxForm({
+        form: 'loginForm',
+        onSubmit(values, dispatch) {
+            dispatch(actions.startLogin(values.email, values.password));
+            console.log(values.email, values.password);
         },
-    }),
-)(LogIn)
+        validate(values) {
+            const error = {};
+            if (!values.email) {
+                error.email = 'No se pueden dejar campos en blanco';
+            } else if (!values.password) {
+                error.password = 'No se pueden dejar campos en blanco';
+            } else if (values.email && !values.email.includes('@')){
+                error.email = 'El correo es inválido';
+            }
+        }
+    })(LogIn)
+);
 

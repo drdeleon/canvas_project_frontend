@@ -17,7 +17,7 @@ import * as types from '../types/assignment';
         -   error
 */
 
-const byId = (state = {}, acion) => {
+const byId = (state = {}, action) => {
     switch(action.payload) {
         case types.ASSIGNMENT_FETCH_COMPLETED: {
             const { entities, order } = action.payload;
