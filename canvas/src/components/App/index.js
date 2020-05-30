@@ -13,6 +13,9 @@ import {
 
 import NavBar from '../NavBar';
 import LogIn from '../Login';
+import AssignmentsList from '../AssignmentsList';
+import NewAssignmentForm from '../NewAssignmentForm';
+
 import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
@@ -27,6 +30,8 @@ const App = () => (
             <Redirect exact from='/' to='/login' />
             <Route exact path='/login' component={LogIn} />
             <Route exact path='/others' component={NavBar} />
+            <Route exact path='/assignments' component={AssignmentsList} />
+            <Route exact path='/new-assignment' component={NewAssignmentForm} />
         </Switch>
       </PersistGate>
     </Router>

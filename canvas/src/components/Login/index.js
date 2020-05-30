@@ -11,7 +11,7 @@ import * as selectors from '../../reducers';
 import { select } from 'redux-saga/effects';
 import { history } from '../App';
 
-const renderInput = ({ input, label, type, meta: { touched, error} }) => (
+const renderInput = ({ input, label, type, meta: { touched, error } }) => (
     <Fragment>
         <div>
             <label>{label}</label>

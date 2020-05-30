@@ -318,4 +318,4 @@ export const getIsRemovingAssignment = state => state.isRemoving;
 export const getIsEdittingAssignment = state => state.isEditting;
 export const getIsScoringAssignment = state => state.isScoring;
 export const getIsSubmittingAssignment = state => state.isSubmitting;
-export const getError = state => state.error;
+export const getAssignmentError = state => state.error;

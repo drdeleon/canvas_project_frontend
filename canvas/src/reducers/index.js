@@ -28,10 +28,10 @@ export const getRefreshingError = state => authSelectors.getRefreshingError(stat
 //  ASSIGNMENT SELECTORS
 export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignment, id); 
 export const getAssignments = state => assignmentsSelectors.getAssignments(state.assignment);
-export const getIsFetchingAssignments = state  => assignmentsSelectors.getIsFetchingAssignments(state.assignment); 
+export const getIsFetchingAssignments = state => assignmentsSelectors.getIsFetchingAssignments(state.assignment); 
 export const getIsCreatingAssignment = state => assignmentsSelectors.getIsCreatingAssignment(state.assignment); 
 export const getIsRemovingAssignment = state => assignmentsSelectors.getIsRemovingAssignment(state.assignment);
 export const getIsEdittingAssignment = state => assignmentsSelectors.getIsEdittingAssignment(state.assignment);
 export const getIsScoringAssignment = state => assignmentsSelectors.getIsScoringAssignment(state.assignment);
-export const getIsSubmittingAssignment = state=> assignmentsSelectors.getIsSubmittingAssignment(state.assignment);
-export const getError = state => assignmentsSelectors.getError(state.assignment);
+export const getIsSubmittingAssignment = state => assignmentsSelectors.getIsSubmittingAssignment(state.assignment);
+export const getAssignmentError = state => assignmentsSelectors.getAssignmentError(state.assignment);
