@@ -3,11 +3,13 @@ import { reducer as formReducer } from 'redux-form';
 
 import auth, * as authSelectors from './auth';
 import assignment, * as assignmentsSelectors from './assignment';
+import navbar, * as navbarSelectors from './navbar';
 
 const reducer = combineReducers({
     //reductores
     auth,
     assignment,
+    navbar,
     form: formReducer,
 });
 
@@ -26,12 +28,15 @@ export const getAuthenticatingError = state => authSelectors.getAuthenticatingEr
 export const getRefreshingError = state => authSelectors.getRefreshingError(state.auth);
 
 //  ASSIGNMENT SELECTORS
-export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignment, id); 
+export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignment, id);
 export const getAssignments = state => assignmentsSelectors.getAssignments(state.assignment);
-export const getIsFetchingAssignments = state => assignmentsSelectors.getIsFetchingAssignments(state.assignment); 
-export const getIsCreatingAssignment = state => assignmentsSelectors.getIsCreatingAssignment(state.assignment); 
+export const getIsFetchingAssignments = state => assignmentsSelectors.getIsFetchingAssignments(state.assignment);
+export const getIsCreatingAssignment = state => assignmentsSelectors.getIsCreatingAssignment(state.assignment);
 export const getIsRemovingAssignment = state => assignmentsSelectors.getIsRemovingAssignment(state.assignment);
 export const getIsEdittingAssignment = state => assignmentsSelectors.getIsEdittingAssignment(state.assignment);
 export const getIsScoringAssignment = state => assignmentsSelectors.getIsScoringAssignment(state.assignment);
 export const getIsSubmittingAssignment = state => assignmentsSelectors.getIsSubmittingAssignment(state.assignment);
 export const getAssignmentError = state => assignmentsSelectors.getAssignmentError(state.assignment);
+
+// NAVBAR SELECTORS
+export const getSelectedNavbarElement = state => navbarSelectors.getSelectedNavbarElement(state.navbar);

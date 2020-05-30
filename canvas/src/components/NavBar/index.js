@@ -1,28 +1,42 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './styles.css';
 
-const NavBar = () => {
-    const [selected, setSelected] = useState(1);
+import * as selectors from '../../reducers'
+import * as actions from '../../actions/navbar';
 
+const NavBar = ({selected, selectNavbarElement}) => {
     return (
-        <>
-            <div className='navbar-container'>
-                <img src={require('../../assets/images/UVG-logo-v.png')} alt="Logo" className='navbar-element logo'/>
-                <div className={`navbar-element ${selected===0 ? 'selected-navbar-el': ''}`} onClick={() => setSelected(0)}> Cuenta </div>
-                <div className={`navbar-element ${selected===1 ? 'selected-navbar-el': ''}`} onClick={() => setSelected(1)}> Tablero </div>
-                <div className={`navbar-element ${selected===2 ? 'selected-navbar-el': ''}`} onClick={() => setSelected(2)}> Cursos </div>
-                <div className={`navbar-element ${selected===3 ? 'selected-navbar-el': ''}`} onClick={() => setSelected(3)}> Grupos </div>
-            </div>  
-        </>
-    )
-}
+        <Fragment>
+            <nav className='navbar-container'>
+                <img src={require('../../assets/images/UVG-logo-v.png')} alt="Logo" className='logo'/>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(0)}} to='/others'>
+                    Cuenta
+                </NavLink>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(1)}} to='/others'>
+                    Tablero
+                </NavLink>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(2)}} to='/others'>
+                    Cursos
+                </NavLink>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/others'>
+                    Grupos
+                </NavLink>
+            </nav>
+        </Fragment>
+    );
+};
 
-const mapStateToProps = state => ({
-    isSelected: true,
-});
-const mapDispatchToProps = dispatch => ({});
-const mergeProps = (propsFromState, propsFromDispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(NavBar);
+export default connect(
+    state => ({
+        selected: selectors.getSelectedNavbarElement(state),
+    }),
+    dispatch => ({
+        selectNavbarElement(index) {
+            dispatch(actions.selectNavbarElement(index));
+        },
+    })
+    )(NavBar);
