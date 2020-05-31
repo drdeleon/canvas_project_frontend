@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import './styles.css';
 
@@ -21,9 +21,9 @@ const NavBar = ({ selectNavbarElement }) => {
                 <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(2)}} to='/courses'>
                     Cursos
                 </NavLink>
-                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/login'>
+                <Link className="navbar-element" onClick={() => {}} to='/login'>
                     Cerrar Sesión
-                </NavLink>
+                </Link>
             </nav>
         </Fragment>
     );
