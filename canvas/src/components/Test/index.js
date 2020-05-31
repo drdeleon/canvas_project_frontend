@@ -6,9 +6,9 @@ import './styles.css';
 const Test = ({}) => {
 
     return (
-        <> 
+        <Fragment> 
         <h1> TEST </h1>
-        </>
+        </Fragment>
     );
 };
 
