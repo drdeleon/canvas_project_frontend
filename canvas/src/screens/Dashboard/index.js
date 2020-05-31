@@ -1,18 +1,16 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import './styles.css';
-
-const Test = ({}) => {
+const Dashboard = ({}) => {
 
     return (
-        <> 
-        <h1> TEST </h1>
-        </>
+        <Fragnment> 
+        <h1> Dashboard </h1>
+        </Fragnment>
     );
 };
 
 export default connect(
     state => ({}),
     dispatch => ({}),
-    )(Test);
+    )(Dashboard);

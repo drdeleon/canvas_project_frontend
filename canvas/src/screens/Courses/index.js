@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import './styles.css';
-
-const Test = ({}) => {
+const Courses = ({}) => {
 
     return (
         <> 
-        <h1> TEST </h1>
+        <h1> Courses </h1>
         </>
     );
 };
@@ -15,4 +13,4 @@ const Test = ({}) => {
 export default connect(
     state => ({}),
     dispatch => ({}),
-    )(Test);
+    )(Courses);

@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 import './styles.css';
 
-import * as selectors from '../../reducers'
+import * as selectors from '../../reducers';
 import * as actions from '../../actions/navbar';
 
-const NavBar = ({selected, selectNavbarElement}) => {
+const NavBar = ({ selectNavbarElement }) => {
     return (
         <Fragment>
             <nav className='navbar-container'>
@@ -21,9 +21,9 @@ const NavBar = ({selected, selectNavbarElement}) => {
                 <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(2)}} to='/others'>
                     Cursos
                 </NavLink>
-                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/others'>
+                {/* <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/others'>
                     Grupos
-                </NavLink>
+                </NavLink> */}
             </nav>
         </Fragment>
     );
