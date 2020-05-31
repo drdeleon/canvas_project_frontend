@@ -12,18 +12,18 @@ const NavBar = ({ selectNavbarElement }) => {
         <Fragment>
             <nav className='navbar-container'>
                 <img src={require('../../assets/images/UVG-logo-v.png')} alt="Logo" className='logo'/>
-                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(0)}} to='/others'>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(0)}} to='/account'>
                     Cuenta
                 </NavLink>
-                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(1)}} to='/others'>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(1)}} to='/dashboard'>
                     Tablero
                 </NavLink>
-                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(2)}} to='/others'>
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(2)}} to='/courses'>
                     Cursos
                 </NavLink>
-                {/* <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/others'>
-                    Grupos
-                </NavLink> */}
+                <NavLink className="navbar-element" activeClassName='selected-navbar-el' onClick={() => {selectNavbarElement(3)}} to='/login'>
+                    Cerrar Sesión
+                </NavLink>
             </nav>
         </Fragment>
     );

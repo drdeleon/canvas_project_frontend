@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import * as types from '../types/navbar';
 
-const selected = (state = 1, action) => {
+const selected = (state = 0, action) => {
     switch (action.type) {
         case types.NAVBAR_ELEMENT_SELECTED:
             {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { createBrowserHistory } from 'history';
 
 import { configureStore } from '../../store';
 import {
@@ -10,13 +11,13 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-
-import NavBar from '../NavBar';
-import LogIn from '../Login';
+import LogIn from '../../screens/Login';
 import AssignmentsList from '../AssignmentsList';
 import NewAssignmentForm from '../NewAssignmentForm';
 
-import { createBrowserHistory } from 'history';
+import Account from '../../screens/Account';
+import Dashboard from '../../screens/Dashboard';
+import Courses from '../../screens/Courses';
 
 export const history = createBrowserHistory();
 
@@ -29,7 +30,9 @@ const App = () => (
         <Switch>
             <Redirect exact from='/' to='/login' />
             <Route exact path='/login' component={LogIn} />
-            <Route exact path='/others' component={NavBar} />
+            <Route exact path='/account' component={Account} />
+            <Route exact path='/courses' component={Courses} />
+            <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/assignments' component={AssignmentsList} />
             <Route exact path='/new-assignment' component={NewAssignmentForm} />
         </Switch>

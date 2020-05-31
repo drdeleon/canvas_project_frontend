@@ -9,7 +9,7 @@ import './styles.css';
 import * as actions from '../../actions/auth';
 import * as selectors from '../../reducers';
 import { select } from 'redux-saga/effects';
-import { history } from '../App';
+import { history } from '../../components/App';
 
 const renderInput = ({ input, label, type, meta: { touched, error } }) => (
     <Fragment>
