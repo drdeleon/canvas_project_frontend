@@ -18,6 +18,7 @@ import NewAssignmentForm from '../NewAssignmentForm';
 import Account from '../../screens/Account';
 import Dashboard from '../../screens/Dashboard';
 import Courses from '../../screens/Courses';
+import UserType from '../../screens/UserType';
 
 export const history = createBrowserHistory();
 
@@ -30,6 +31,7 @@ const App = () => (
         <Switch>
             <Redirect exact from='/' to='/login' />
             <Route exact path='/login' component={LogIn} />
+            <Route exact path='/user-type' component={UserType} />
             <Route exact path='/account' component={Account} />
             <Route exact path='/courses' component={Courses} />
             <Route exact path='/dashboard' component={Dashboard} />

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import auth, * as authSelectors from './auth';
+import userType, * as userTypeSelectors from './userType';
 import assignment, * as assignmentsSelectors from './assignment';
 import navbar, * as navbarSelectors from './navbar';
 import studentCourses, * as studentCoursesSelectors from './studentCourses';
@@ -10,6 +11,7 @@ import professorCourses, * as professorCoursesSelectors from './professorCourses
 const reducer = combineReducers({
     //reductores
     auth,
+    userType,
     assignment,
     navbar,
     studentCourses,
@@ -31,6 +33,9 @@ export const getIsAuthenticating = state => authSelectors.getIsAuthenticating(st
 export const getIsRefreshing = state => authSelectors.getIsRefreshing(state.auth);
 export const getAuthenticatingError = state => authSelectors.getAuthenticatingError(state.auth);
 export const getRefreshingError = state => authSelectors.getRefreshingError(state.auth);
+
+// USER TYPE SELECTORS
+export const getSelectedUserType = state => userTypeSelectors.getSelectedUserType(state.userType);
 
 //  ASSIGNMENT SELECTORS
 export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignment, id);

@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/professorCourses';
 import CourseCard from '../CourseCard';
@@ -21,7 +20,7 @@ const ProfessorCourses = ({professorCourses, isLoading, onLoad}) => {
                 )
             }
             {
-                petOwners.length > 0 && !isLoading && (
+                professorCourses.length > 0 && !isLoading && (
                     <div className='student-courses-container'>
                         {
                             professorCourses.map(({id, name, section, year, cicle}) => <CourseCard key={id} id={id} name={name} section={section} year={year} cicle={cicle}/>)

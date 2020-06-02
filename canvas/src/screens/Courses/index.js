@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/studentCourses';
+// import * as actions from '../../actions/studentCourses';
 import StudentCourses from '../../components/StudentCourses';
+import ProfessorCourses from '../../components/ProfessorCourses';
 
-const Courses = ({}) => {
+const Courses = ({ isStudent, isProfessor, isAssistant, }) => {
 
     const divStyle = {
         display: 'flex',
@@ -18,9 +19,19 @@ const Courses = ({}) => {
             <div style={divStyle}>
                 <NavBar />
                 {
-                    true ?
-                    <StudentCourses />
-                    : <h1></h1>
+                    isStudent && (
+                        <StudentCourses />
+                    )
+                }
+                {
+                    isProfessor && (
+                        <ProfessorCourses />
+                    )
+                }
+                {
+                    isAssistant && (
+                        <StudentCourses />
+                    )
                 }
             </div>
         </Fragment>
@@ -28,6 +39,10 @@ const Courses = ({}) => {
 };
 
 export default connect(
-    state => ({}),
+    state => ({
+        isStudent: selectors.getSelectedUserType(state) === 0,
+        isProfessor: selectors.getSelectedUserType(state) === 1,
+        isAssistant: selectors.getSelectedUserType(state) === 2,
+    }),
     dispatch => ({}),
     )(Courses);

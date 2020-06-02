@@ -1,0 +1,36 @@
+.container {
+    width: fill-available;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.header {
+    width: fill-available;
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #aeaeae;
+    padding: 1rem;
+    margin: 0rem 2rem;
+}
+
+.user-type-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: xx-large;
+    font-weight: 200;
+    text-align: center;
+    background-color: rgb(36, 198, 114);
+    width: 25rem;
+    height: 5rem;
+    margin: 3rem;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 5px #32c700;
+}
+
+.user-type-card:hover {
+    box-shadow: 1px 1px 10px #888888;
+}
