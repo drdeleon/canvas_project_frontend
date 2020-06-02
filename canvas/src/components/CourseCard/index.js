@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './styles.css';
 
-const CourseCard = ({ name, section, year, cicle }) => {
+const CourseCard = ({ id, name, section, year, cicle }) => {
 
     return (
         <Fragment>

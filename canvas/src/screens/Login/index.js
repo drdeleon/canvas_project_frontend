@@ -46,6 +46,12 @@ const LogIn = ({
                         <div className='login-content'>
                             <Form onSubmit={handleSubmit}>
                                 <Field 
+                                    name= "username"
+                                    type= "text"
+                                    component = { renderInput }
+                                    label= "Usuario"
+                                />               
+                                <Field 
                                     name= "email"
                                     type= "text"
                                     component = { renderInput }
@@ -60,7 +66,7 @@ const LogIn = ({
                                 <p>
                                     {
                                         isLoading ? (
-                                            <stromg>{'Cargando...'}</stromg>
+                                            <strong>{'Cargando...'}</strong>
                                         ) : (
                                             <button className="login-button" type="submit">
                                                 {'Iniciar sesión'}
@@ -88,14 +94,16 @@ export default connect(
     reduxForm({
         form: 'loginForm',
         onSubmit(values, dispatch) {
-            dispatch(actions.startLogin(values.email, values.password));
-            console.log(values.email, values.password);
+            dispatch(actions.startLogin(values.username, values.email, values.password));
+            console.log(values.username, values.email, values.password);
         },
         validate(values) {
             const error = {};
             if (!values.email) {
                 error.email = 'No se pueden dejar campos en blanco';
             } else if (!values.password) {
+                error.password = 'No se pueden dejar campos en blanco';
+            } else if (!values.username) {
                 error.password = 'No se pueden dejar campos en blanco';
             } else if (values.email && !values.email.includes('@')){
                 error.email = 'El correo es inválido';

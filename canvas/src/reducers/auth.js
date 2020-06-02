@@ -4,152 +4,205 @@ import { combineReducers } from 'redux';
 import * as types from '../types/auth';
 
 const token = (state = null, action) => {
-    switch(action.payload) {
-        case types.AUTHENTICATION_STARTED: {
-            return null;
-        }
+    switch (action.type) {
+        case types.AUTHENTICATION_STARTED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_COMPLETED: {
-            return action.payload.token;
-        }
+        case types.AUTHENTICATION_COMPLETED:
+            {
+                return action.payload.token;
+            }
 
-        case types.AUTHENTICATION_FAILED: {
-            return null;
-        }
+        case types.AUTHENTICATION_FAILED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_IDENTITY_CLEARED: {
-            return null;
-        }
+        case types.AUTHENTICATION_IDENTITY_CLEARED:
+            {
+                return null;
+            }
 
-        case types.TOKEN_REFRESH_COMPLETED: {
-            return action.payload.newToken;
-        }
+        case types.TOKEN_REFRESH_COMPLETED:
+            {
+                return action.payload.newToken;
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     };
 };
 
 const decoded = (state = null, action) => {
-    switch(action.payload) {
-        case types.AUTHENTICATION_STARTED: {
-            return null;
-        }
+    switch (action.type) {
+        case types.AUTHENTICATION_STARTED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_COMPLETED: {
-            return jwtDecode(action.payload.token);
-        }
+        case types.AUTHENTICATION_COMPLETED:
+            {
+                return jwtDecode(action.payload.token);
+            }
 
-        case types.AUTHENTICATION_FAILED: {
-            return null;
-        }
+        case types.AUTHENTICATION_FAILED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_IDENTITY_CLEARED: {
-            return null;
-        }
+        case types.AUTHENTICATION_IDENTITY_CLEARED:
+            {
+                return null;
+            }
 
-        case types.TOKEN_REFRESH_COMPLETED: {
-            return jwtDecode(action.payload.newToken);
-        }
+        case types.TOKEN_REFRESH_COMPLETED:
+            {
+                return jwtDecode(action.payload.newToken);
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     };
 };
 
 const isAutenticating = (state = false, action) => {
-    switch(action.payload) {
-        case types.AUTHENTICATION_STARTED: {
-            return true;
-        }
+    switch (action.type) {
+        case types.AUTHENTICATION_STARTED:
+            {
+                return true;
+            }
 
-        case types.AUTHENTICATION_COMPLETED: {
-            return false;
-        }
+        case types.AUTHENTICATION_COMPLETED:
+            {
+                return false;
+            }
 
-        case types.AUTHENTICATION_FAILED: {
-            return false;
-        }
+        case types.AUTHENTICATION_FAILED:
+            {
+                return false;
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     };
 };
 
 const isRefreshing = (state = false, action) => {
-    switch(action.payload) {
-        case types.TOKEN_REFRESH_STARTED: {
-            return true;
-        }
+    switch (action.type) {
+        case types.TOKEN_REFRESH_STARTED:
+            {
+                return true;
+            }
 
-        case types.TOKEN_REFRESH_COMPLETED: {
-            return false;
-        }
+        case types.TOKEN_REFRESH_COMPLETED:
+            {
+                return false;
+            }
 
-        case types.TOKEN_REFRESH_FAILED: {
-            return false
-        }
+        case types.TOKEN_REFRESH_FAILED:
+            {
+                return false
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     };
 };
 
 const authenticatingError = (state = null, action) => {
-    switch(action.payload) {
-        case types.AUTHENTICATION_STARTED: {
-            return null;
-        }
+    switch (action.type) {
+        case types.AUTHENTICATION_STARTED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_COMPLETED: {
-            return null;
-        }
+        case types.AUTHENTICATION_COMPLETED:
+            {
+                return null;
+            }
 
-        case types.AUTHENTICATION_FAILED: {
-            return action.payload.error;
-        }
+        case types.AUTHENTICATION_FAILED:
+            {
+                return action.payload.error;
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     }
-}
+};
 
 const refreshingError = (state = null, action) => {
-    switch(action.payload) {
-        case types.TOKEN_REFRESH_STARTED: {
-            return null;
-        }
+    switch (action.type) {
+        case types.TOKEN_REFRESH_STARTED:
+            {
+                return null;
+            }
 
-        case types.TOKEN_REFRESH_COMPLETED: {
-            return null;
-        }
+        case types.TOKEN_REFRESH_COMPLETED:
+            {
+                return null;
+            }
 
-        case types.TOKEN_REFRESH_FAILED: {
-            return action.payload.error;
-        }
+        case types.TOKEN_REFRESH_FAILED:
+            {
+                return action.payload.error;
+            }
 
-        default: {
-            return state;
-        }
+        default:
+            {
+                return state;
+            }
     }
+};
+
+const user = (state = null, action) => {
+    switch (action.type) {
+        case types.AUTHENTICATION_STARTED:
+        case types.AUTHENTICATION_FAILED:
+        case types.AUTHENTICATION_IDENTITY_CLEARED:
+        case types.TOKEN_REFRESH_COMPLETED:
+            {
+                return null;
+            }
+
+        case types.AUTHENTICATION_COMPLETED:
+            {
+                console.log(action.payload.user);
+                return action.payload.user;
+            }
+
+        default:
+            {
+                return state;
+            }
+    };
 }
 
 const auth = combineReducers({
-    token, 
+    token,
+    user,
     decoded,
     isAutenticating,
-    isRefreshing, 
+    isRefreshing,
     authenticatingError,
 });
 
 export default auth;
 
 export const getAuthToken = state => state.token;
+export const getLoggedUser = state => state.user;
 export const getAuthUserID = state => state.decoded ? state.decoded_userid : null;
 export const getAuthExpiration = state => state.decoded ? state.decoded.exp : null;
 export const getAuthUsername = state => state.decoded ? state.decoded.username : null;
