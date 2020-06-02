@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/studentCourses';
+import StudentCourses from '../../components/StudentCourses';
 
 const Courses = ({}) => {
 
@@ -16,12 +17,11 @@ const Courses = ({}) => {
         <Fragment>
             <div style={divStyle}>
                 <NavBar />
-                <div>
-                    {false ?
-                    <h1> Courses </h1>
-                    : <h1>No funciona</h1>
-                    }
-                </div>
+                {
+                    true ?
+                    <StudentCourses />
+                    : <h1></h1>
+                }
             </div>
         </Fragment>
     );

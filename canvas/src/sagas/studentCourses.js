@@ -23,7 +23,6 @@ function* fetchStudentCourses(action) {
         if (isAuth) {
             const token = yield select(selectors.getAuthToken);
             const user = yield select(selectors.getLoggedUser);
-            console.log(user)
 
             const response = yield call(
                 fetch,
@@ -43,12 +42,8 @@ function* fetchStudentCourses(action) {
                     result,
                 } = normalize(jsonResult, schemas.courses);
 
-                yield put(
-                    actions.completeFetchingStudentCourses(
-                        courses,
-                        result,
-                    ),
-                );
+
+                yield put(actions.completeFetchingStudentCourses(courses, result));
             } else {
                 // const { non_field_errors } = yield response.json();
                 // yield put(actions.failLogin(non_field_errors[0]));
@@ -56,11 +51,10 @@ function* fetchStudentCourses(action) {
         }
     } catch (error) {
         yield put(actions.failFetchingStudentCourses('Error en la conexión con el servidor.'));
-        console.log("ERROR", error)
     }
 };
 
-export function* watchstudentCoursesFetch() {
+export function* watchStudentCoursesFetch() {
     yield takeEvery(
         types.STUDENT_COURSES_FETCH_STARTED,
         fetchStudentCourses,
@@ -111,7 +105,6 @@ export function* watchstudentCoursesFetch() {
 //         }
 //     } catch (error) {
 //         // yield put(actions.failLogin('Falló horrible la conexión mano'));
-//         console.log("ERROR", error)
 //     }
 // };
 
@@ -159,7 +152,6 @@ export function* watchstudentCoursesFetch() {
 //         }
 //     } catch (error) {
 //         // yield put(actions.failLogin('Falló horrible la conexión mano'));
-//         console.log("ERROR", error)
 //     }
 // };
 

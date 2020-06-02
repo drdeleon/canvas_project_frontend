@@ -6,26 +6,31 @@ import * as selectors from '../../reducers';
 import * as actions from '../../actions/studentCourses';
 import CourseCard from '../CourseCard';
 
+import './styles.css';
+
 const StudentCourses = ({studentCourses, isLoading, onLoad}) => {
     useEffect(onLoad, []);
     return (
         <Fragment>
             {
-                studentCourses.length <= 0 && !isLoading (
-                    <div className='title'> No hay cursos asignados </div>
+                studentCourses.length <= 0 && !isLoading && (
+                    <h1 className='header'> No hay cursos asignados </h1>
                 )
             }
             {
                 isLoading && (
-                    <div className='title'> Cargando... </div>
+                    <div className='header'> Cargando... </div>
                 )
             }
             {
-                petOwners.length > 0 && !isLoading && (
-                    <div className='student-courses-container'>
-                        {
-                            studentCourses.map(({id, name, section, year, cicle}) => <CourseCard key={id} id={id} name={name} section={section} year={year} cicle={cicle}/>)
-                        }
+                studentCourses.length > 0 && !isLoading && (
+                    <div className='container'>
+                        <div className='header'> CURSOS </div>
+                        <div className='student-courses-container'>
+                            {
+                                studentCourses.map(({id, name, section, year, cicle}) => <CourseCard key={id} id={id} name={name} section={section} year={year} cicle={cicle}/>)
+                            }
+                        </div>
                     </div>
                 )
             }

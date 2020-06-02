@@ -1,9 +1,26 @@
-.student-courses-container {
+.container {
+    width: fill-available;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
-.title {
-    font-size: large;
+.header {
+    width: fill-available;
+    font-size: xx-large;
     font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #aeaeae;
+    padding: 1rem;
+    margin: 0rem 2rem;
+}
+
+.student-courses-container {
+    width: fill-available;
+    background-color: blueviolet;
+    margin: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }

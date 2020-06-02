@@ -16,7 +16,7 @@ import * as types from '../types/studentCourses';
 */
 
 const byId = (state = {}, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSES_FETCH_COMPLETED:
             {
                 const { entities, order } = action.payload;
@@ -66,7 +66,7 @@ const byId = (state = {}, action) => {
 };
 
 const order = (state = [], action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSES_FETCH_COMPLETED:
             {
                 return union(action.payload.order);
@@ -90,7 +90,7 @@ const order = (state = [], action) => {
 };
 
 const isFetching = (state = false, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSES_FETCH_STARTED:
             {
                 return true;
@@ -110,7 +110,7 @@ const isFetching = (state = false, action) => {
 };
 
 const isCreating = (state = false, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSE_ADD_STARTED:
             {
                 return true;
@@ -130,7 +130,7 @@ const isCreating = (state = false, action) => {
 };
 
 const isRemoving = (state = false, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSE_REMOVE_STARTED:
             {
                 return true;
@@ -150,7 +150,7 @@ const isRemoving = (state = false, action) => {
 };
 
 const isEditing = (state = false, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSE_EDIT_STARTED:
             {
                 return true;
@@ -170,7 +170,7 @@ const isEditing = (state = false, action) => {
 };
 
 const error = (state = null, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case types.STUDENT_COURSES_FETCH_STARTED:
         case types.STUDENT_COURSES_FETCH_COMPLETED:
         case types.STUDENT_COURSE_ADD_STARTED:

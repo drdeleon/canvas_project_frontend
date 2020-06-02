@@ -8,10 +8,12 @@ const CourseCard = ({ id, name, section, year, cicle }) => {
     return (
         <Fragment>
             <div className='course-card-container'>
-                <h3> {name} </h3>
-                <p> {year} </p>
-                <p> {cicle} </p>
-                <p> {section} </p>
+                <img className='course-card-img' src="" alt=""/>
+                <div className='course-card-footer'>
+                    <div className='course-card-name'> {name} </div>
+                    <div className='course-card-info'> CICLO {cicle} - {year} </div>
+                    <div className='course-card-info'> Sección {section} </div>
+                </div>
             </div>
         </Fragment>
     );
