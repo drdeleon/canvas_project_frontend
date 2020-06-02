@@ -18,9 +18,9 @@
 
 .student-courses-container {
     width: fill-available;
-    background-color: blueviolet;
     margin: 3rem;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
 }
