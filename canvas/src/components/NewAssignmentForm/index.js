@@ -25,7 +25,7 @@ const renderInput = ({ input, label, type, className, meta: { touched, error } }
             </div>
         </div>
     </Fragment>
-)
+);
 
 
 const renderDesc = ({ textarea, label, type, rows, cols, meta: { touched, error } }) => (
@@ -47,7 +47,7 @@ const renderDesc = ({ textarea, label, type, rows, cols, meta: { touched, error 
             </div>
         </div>
     </Fragment>
-)
+);
 
 const NewAssignmentForm = ({
     handleSubmit,
@@ -101,7 +101,7 @@ const NewAssignmentForm = ({
             </div>
         </Fragment>
     )
-}
+};
 
 export default connect(
     state => ({
@@ -116,8 +116,13 @@ export default connect(
         },
         validate(values) {
             const error = {};
-            console.log('error');
-
+            if(!values.title) {
+                error.title='No se puede dejar el título en blanco';
+            } else if(!values.deadline) {
+                error.deadline='No se puede dejar la fecha en blanco';
+            } else if(!values.score) {
+                error.score='No se puede dejar el punteo en blanco';
+            }
         }
     })(NewAssignmentForm)
 );

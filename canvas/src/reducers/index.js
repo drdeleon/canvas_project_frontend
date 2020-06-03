@@ -6,6 +6,7 @@ import assignment, * as assignmentsSelectors from './assignment';
 import navbar, * as navbarSelectors from './navbar';
 import studentCourses, * as studentCoursesSelectors from './studentCourses';
 import professorCourses, * as professorCoursesSelectors from './professorCourses';
+import announcement,* as announcementSelectors from './announcement';
 
 const reducer = combineReducers({
     //reductores
@@ -14,6 +15,7 @@ const reducer = combineReducers({
     navbar,
     studentCourses,
     professorCourses,
+    announcement,
     form: formReducer,
 });
 
@@ -63,3 +65,11 @@ export const getIsCreatingProfessorCourse = state => professorCoursesSelectors.g
 export const getIsRemovingProfessorCourse = state => professorCoursesSelectors.getIsRemovingProfessorCourse(state.professorCourses);
 export const getIsEditingProfessorCourse = state => professorCoursesSelectors.getIsEditingProfessorCourse(state.professorCourses);
 export const getProfessorCoursesError = state => professorCoursesSelectors.getProfessorCoursesError(state.professorCourses);
+
+// ANNOUNCEMENT SELECTORS
+export const getAnnouncement = (state, id) => announcementSelectors.getAnnouncement(state.announcement, id);
+export const getAnnouncements = state => announcementSelectors.getAnnouncements(state.announcement);
+export const getIsFetchingAnnouncement = state => announcementSelectors.getIsFetchingAnnouncement(state.announcement);
+export const getIsCreatingAnnouncement = state => announcementSelectors.getIsCreatingAnnouncement(state.announcement);
+export const getIsRemovingAnnouncement = state => announcementSelectors.getIsRemovingAnnouncement(state.announcement);
+export const getAnnouncementError = state => announcementSelectors.getAnnouncementError(state.announcement);
