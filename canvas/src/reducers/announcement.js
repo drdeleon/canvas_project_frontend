@@ -17,256 +17,252 @@ import { getAssignments } from './assignment';
 
 
 const order = (state = {}, action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENTS_FETCH_COMPLETED:
-            {
-                const { entities, order } = action.payload;
-                const newState = {...state };
+        switch (action.type) {
+            case types.ANNOUNCEMENTS_FETCH_COMPLETED:
+                {
+                    const { entities, order } = action.payload;
+                    const newState = {...state };
 
-                order.forEach(id => {
-                    newState[id] = {
-                        ...entities[id],
-                    };
-                });
+                    order.forEach(id => {
+                        newState[id] = {
+                            ...entities[id],
+                        };
+                    });
 
-                return newState;
-            }
+                    case types.ANNOUNCEMENT_FETCH_STARTED:
+                        {
+                            const { entities, order } = action.payload;
+                            const newState = {...state };
 
-        case types.ANNOUNCEMENT_FETCH_STARTED:
-            {
-                const { entities, order } = action.payload;
-                const newState = {...state };
+                            order.forEach(id => {
+                                newState[id] = {
+                                    ...entities[id],
+                                };
+                            });
 
-                order.forEach(id => {
-                    newState[id] = {
-                        ...entities[id],
-                    };
-                });
+                            return newState;
+                        }
 
-                return newState;
-            }
+                    case types.ANNOUNCEMENT_ADD_COMPLETED:
+                        {
+                            const announcement = action.payload;
 
-        case types.ANNOUNCEMENT_ADD_COMPLETED:
-            {
-                const announcement = action.payload;
+                            state[announcement.id] = {
+                                ...announcement,
+                            }
 
-                state[announcement.id] = {
-                    ...announcement,
+                            return state;
+                        }
+
+                    case types.ANNOUNCEMENT_REMOVE_COMPLETED:
+                        {
+                            return omit(state, action.payload.id);
+                        }
+
+                        default: {
+                            return state;
+                        }
                 }
+        };
 
-                return state;
+        const byId = (state = [], action) => {
+            switch (action.type) {
+                case types.ANNOUNCEMENTS_FETCH_COMPLETED:
+                    {
+                        return union(action.payload.id);
+                    }
+
+                case types.ANNOUNCEMENT_FETCH_COMPLETED:
+                    {
+                        return union(action.payload.id);
+                    }
+
+                case types.ANNOUNCEMENT_ADD_COMPLETED:
+                    {
+                        return [...state, action.payload.id];
+                    }
+
+                case types.ANNOUNCEMENT_REMOVE_COMPLETED:
+                    {
+                        return state.filter(id => id !== action.payload.id);
+                    }
+
+                default:
+                    {
+                        return state;
+                    }
             }
+        };
 
-        case types.ANNOUNCEMENT_REMOVE_COMPLETED:
-            {
-                return omit(state, action.payload.id);
+        const isFetching = (state = false, action) => {
+            switch (action.type) {
+                case types.ANNOUNCEMENTS_FETCH_STARTED:
+                    {
+                        return true;
+                    }
+
+                case types.ANNOUNCEMENTS_FETCH_COMPLETED:
+                    {
+                        return false;
+                    }
+
+                case types.ANNOUNCEMENTS_FETCH_FAILED:
+                    {
+                        return false;
+                    }
+
+                case types.ANNOUNCEMENT_FETCH_STARTED:
+                    {
+                        return true;
+                    }
+
+                case types.ANNOUNCEMENT_FETCH_COMPLETED:
+                    {
+                        return false;
+                    }
+
+                case types.ANNOUNCEMENT_FETCH_FAILED:
+                    {
+                        return false;
+                    }
+
+                default:
+                    {
+                        return false;
+                    }
             }
+        };
 
-        default:
-            {
-                return state;
+        const isCreating = (state = false, action) => {
+            switch (action.type) {
+                case types.ANNOUNCEMENT_ADD_STARTED:
+                    {
+                        return true;
+                    }
+
+                case types.ANNOUNCEMENT_ADD_COMPLETED:
+                    {
+                        return false;
+                    }
+
+                case types.ANNOUNCEMENT_ADD_FAILED:
+                    {
+                        return false;
+                    }
+
+                default:
+                    {
+                        return state;
+                    }
             }
-    }
-};
+        };
 
-const byId = (state = [], action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENTS_FETCH_COMPLETED:
-            {
-                return union(action.payload.id);
+        const isRemoving = (state = false, action) => {
+            switch (action.type) {
+                case types.ANNOUNCEMENT_REMOVE_STARTED:
+                    {
+                        return true;
+                    }
+
+                case types.ANNOUNCEMENT_REMOVE_COMPLETED:
+                    {
+                        return false;
+                    }
+
+                case types.ANNOUNCEMENT_REMOVE_FAILED:
+                    {
+                        return false
+                    }
+
+                default:
+                    {
+                        return state;
+                    }
             }
+        };
 
-        case types.ANNOUNCEMENT_FETCH_COMPLETED:
-            {
-                return union(action.payload.id);
-            }
+        const error = (state = null, action) => {
+            switch (action.type) {
+                case types.ANNOUNCEMENTS_FETCH_STARTED:
+                    {
+                        return null;
+                    }
 
-        case types.ANNOUNCEMENT_ADD_COMPLETED:
-            {
-                return [...state, action.payload.id];
-            }
+                case types.ANNOUNCEMENTS_FETCH_COMPLETED:
+                    {
+                        return null;
+                    }
 
-        case types.ANNOUNCEMENT_REMOVE_COMPLETED:
-            {
-                return state.filter(id => id !== action.payload.id);
-            }
+                case types.ANNOUNCEMENTS_FETCH_FAILED:
+                    {
+                        return action.payload.error;
+                    }
 
-        default:
-            {
-                return state;
-            }
-    }
-};
+                case types.ANNOUNCEMENT_FETCH_STARTED:
+                    {
+                        return null;
+                    }
 
-const isFetching = (state = false, action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENTS_FETCH_STARTED:
-            {
-                return true;
-            }
+                case types.ANNOUNCEMENT_FETCH_COMPLETED:
+                    {
+                        return null;
+                    }
 
-        case types.ANNOUNCEMENTS_FETCH_COMPLETED:
-            {
-                return false;
-            }
+                case types.ANNOUNCEMENT_FETCH_FAILED:
+                    {
+                        return action.payload.error;
+                    }
 
-        case types.ANNOUNCEMENTS_FETCH_FAILED:
-            {
-                return false;
-            }
+                case types.ANNOUNCEMENT_ADD_STARTED:
+                    {
+                        return null;
+                    }
 
-        case types.ANNOUNCEMENT_FETCH_STARTED:
-            {
-                return true;
-            }
+                case types.ANNOUNCEMENT_ADD_COMPLETED:
+                    {
+                        return null;
+                    }
 
-        case types.ANNOUNCEMENT_FETCH_COMPLETED:
-            {
-                return false;
-            }
+                case types.ANNOUNCEMENT_ADD_FAILED:
+                    {
+                        return action.payload.error;
+                    }
 
-        case types.ANNOUNCEMENT_FETCH_FAILED:
-            {
-                return false;
-            }
+                case types.ANNOUNCEMENT_REMOVE_STARTED:
+                    {
+                        return null;
+                    }
 
-        default:
-            {
-                return false;
-            }
-    }
-};
+                case types.ANNOUNCEMENT_REMOVE_COMPLETED:
+                    {
+                        return null;
+                    }
 
-const isCreating = (state = false, action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENT_ADD_STARTED:
-            {
-                return true;
-            }
+                case types.ANNOUNCEMENT_REMOVE_FAILED:
+                    {
+                        return action.payload.error;
+                    }
 
-        case types.ANNOUNCEMENT_ADD_COMPLETED:
-            {
-                return false;
-            }
+                default:
+                    {
+                        return state;
+                    }
+            };
 
-        case types.ANNOUNCEMENT_ADD_FAILED:
-            {
-                return false;
-            }
+        };
 
-        default:
-            {
-                return state;
-            }
-    }
-};
+        export default combineReducers({
+            order,
+            byId,
+            isFetching,
+            isCreating,
+            isRemoving,
+            error,
+        });
 
-const isRemoving = (state = false, action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENT_REMOVE_STARTED:
-            {
-                return true;
-            }
-
-        case types.ANNOUNCEMENT_REMOVE_COMPLETED:
-            {
-                return false;
-            }
-
-        case types.ANNOUNCEMENT_REMOVE_FAILED:
-            {
-                return false
-            }
-
-        default:
-            {
-                return state;
-            }
-    }
-};
-
-const error = (state = null, action) => {
-    switch (action.type) {
-        case types.ANNOUNCEMENTS_FETCH_STARTED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENTS_FETCH_COMPLETED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENTS_FETCH_FAILED:
-            {
-                return action.payload.error;
-            }
-
-        case types.ANNOUNCEMENT_FETCH_STARTED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_FETCH_COMPLETED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_FETCH_FAILED:
-            {
-                return action.payload.error;
-            }
-
-        case types.ANNOUNCEMENT_ADD_STARTED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_ADD_COMPLETED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_ADD_FAILED:
-            {
-                return action.payload.error;
-            }
-
-        case types.ANNOUNCEMENT_REMOVE_STARTED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_REMOVE_COMPLETED:
-            {
-                return null;
-            }
-
-        case types.ANNOUNCEMENT_REMOVE_FAILED:
-            {
-                return action.payload.error;
-            }
-
-        default:
-            {
-                return state;
-            }
-    };
-
-};
-
-export default combineReducers({
-    order,
-    byId,
-    isFetching,
-    isCreating,
-    isRemoving,
-    error,
-});
-
-export const getAnnouncement = (state, id) => state.byId[id];
-export const getAnnouncements = state => state.order.map(id => getAnnouncement(state, id));
-export const getIsFetchingAnnouncement = state => state.isFetching;
-export const getIsCreatingAnnouncement = state => state.isCreating;
-export const getIsRemovingAnnouncement = state => state.isRemoving;
-export const getAnnouncementError = state => state.error;
+        export const getAnnouncement = (state, id) => state.byId[id];
+        export const getAnnouncements = state => state.order.map(id => getAnnouncement(state, id));
+        export const getIsFetchingAnnouncement = state => state.isFetching;
+        export const getIsCreatingAnnouncement = state => state.isCreating;
+        export const getIsRemovingAnnouncement = state => state.isRemoving;
+        export const getAnnouncementError = state => state.error;

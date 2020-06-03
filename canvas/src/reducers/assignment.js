@@ -18,7 +18,7 @@ import * as types from '../types/assignment';
 */
 
 const byId = (state = {}, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_FETCH_COMPLETED: {
             const { entities, order } = action.payload;
             const newState = { ...state };
@@ -83,7 +83,7 @@ const byId = (state = {}, action) => {
 }
 
 const order = (state = [], action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_FETCH_COMPLETED: {
             return union(action.payload.order);
         }
@@ -103,7 +103,7 @@ const order = (state = [], action) => {
 }
 
 const isFetching = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_FETCH_STARTED: {
             return true;
         }
@@ -123,7 +123,7 @@ const isFetching = (state = false, action) => {
 };
 
 const isCreating = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_ADD_STARTED: {
             return true;
         }
@@ -143,7 +143,7 @@ const isCreating = (state = false, action) => {
 };
 
 const isRemoving = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_REMOVE_STARTED: {
             return true;
         }
@@ -163,7 +163,7 @@ const isRemoving = (state = false, action) => {
 };
 
 const isEditting = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_EDIT_STARTED: {
             return true;
         }
@@ -183,7 +183,7 @@ const isEditting = (state = false, action) => {
 };
 
 const isScoring = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_SCORE_STARTED: {
             return true;
         }
@@ -203,7 +203,7 @@ const isScoring = (state = false, action) => {
 };
 
 const isSubmitting = (state = false, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_SUBMIT_STARTED: {
             return true;
         }
@@ -223,7 +223,7 @@ const isSubmitting = (state = false, action) => {
 };
 
 const error = (state = null, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ASSIGNMENT_FETCH_STARTED: {
             return null;
         }
