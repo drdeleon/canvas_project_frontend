@@ -17,7 +17,7 @@ import { getAssignments } from './assignment';
 
 
 const order = ( state = {}, action ) => {
-    switch(action.types) {
+    switch(action.type) {
         case types.ANNOUNCEMENTS_FETCH_COMPLETED: {
             const { entities, order } = action.payload;
             const newState = { ...state };
@@ -65,7 +65,7 @@ const order = ( state = {}, action ) => {
 };
 
 const byId = ( state = [], action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case types.ANNOUNCEMENTS_FETCH_COMPLETED: {
             return union(action.payload.id);
         }
@@ -141,7 +141,7 @@ const isCreating = ( state = false, action ) => {
 };
 
 const isRemoving = ( state = false, action ) => {
-    switch(action.types) {
+    switch(action.type) {
         case types.ANNOUNCEMENT_REMOVE_STARTED: {
             return true;
         }
@@ -161,7 +161,7 @@ const isRemoving = ( state = false, action ) => {
 };
 
 const error = ( state = null, action ) => {
-    switch(action.types) {
+    switch(action.type) {
         case types.ANNOUNCEMENTS_FETCH_STARTED: {
             return null;
         }
@@ -227,7 +227,7 @@ export default combineReducers ({
 });
 
 export const getAnnouncement = (state, id) => state.byId[id];
-export const getAnnouncements = state => state.order.map(getAnnouncement(state, id));
+export const getAnnouncements = state => state.order.map(id => getAnnouncement(state, id));
 export const getIsFetchingAnnouncement = state => state.isFetching;
 export const getIsCreatingAnnouncement = state => state.isCreating;
 export const getIsRemovingAnnouncement = state => state.isRemoving;

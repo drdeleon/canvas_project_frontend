@@ -21,9 +21,12 @@ export const startFetchingAnnouncement = announcement => ({
     payload: announcement,
 });
 
-export const completeFetchingAnnouncement = announcement => ({
+export const completeFetchingAnnouncement = (entities, order) => ({
     type: types.ANNOUNCEMENT_FETCH_COMPLETED,
-    payload: announcement,
+    payload: {
+        entities,
+        order,
+    },
 });
 
 export const failFetchingAnnouncement = (announcement, error) => ({
