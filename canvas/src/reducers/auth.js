@@ -122,39 +122,14 @@ const isRefreshing = (state = false, action) => {
 const authenticatingError = (state = null, action) => {
     switch (action.type) {
         case types.AUTHENTICATION_STARTED:
-            {
-                return null;
-            }
-
+        case types.TOKEN_REFRESH_STARTED:
+        case types.TOKEN_REFRESH_COMPLETED:
         case types.AUTHENTICATION_COMPLETED:
             {
                 return null;
             }
 
         case types.AUTHENTICATION_FAILED:
-            {
-                return action.payload.error;
-            }
-
-        default:
-            {
-                return state;
-            }
-    }
-};
-
-const refreshingError = (state = null, action) => {
-    switch (action.type) {
-        case types.TOKEN_REFRESH_STARTED:
-            {
-                return null;
-            }
-
-        case types.TOKEN_REFRESH_COMPLETED:
-            {
-                return null;
-            }
-
         case types.TOKEN_REFRESH_FAILED:
             {
                 return action.payload.error;
@@ -187,7 +162,7 @@ const user = (state = null, action) => {
                 return state;
             }
     };
-}
+};
 
 const auth = combineReducers({
     token,

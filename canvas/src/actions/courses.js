@@ -1,6 +1,6 @@
 import * as types from '../types/courses';
 
-// FETCHING
+// FETCHING COURSES
 export const startFetchingCourses = () => ({
     type: types.COURSES_FETCH_STARTED,
 });
@@ -15,6 +15,26 @@ export const completeFetchingCourses = (entities, order) => ({
 
 export const failFetchingCourses = error => ({
     type: types.COURSES_FETCH_FAILED,
+    payload: {
+        error,
+    },
+});
+
+// FETCHING COURSE
+export const startFetchingCourse = id => ({
+    type: types.COURSE_FETCH_STARTED,
+    payload: {
+        id,
+    },
+});
+
+export const completeFetchingCourse = Course => ({
+    type: types.COURSE_FETCH_COMPLETED,
+    payload: Course,
+});
+
+export const failFetchingCourse = error => ({
+    type: types.COURSE_FETCH_FAILED,
     payload: {
         error,
     },

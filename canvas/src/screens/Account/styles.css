@@ -1,34 +1,28 @@
-.course-container {
+.account-container {
     display: flex;
     flex-direction: column;
     width: fill-available;
 }
 
-.course-description {
+.account-description {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fill-available;
+    justify-content: space-between;
+    align-items: flex-start;
     font-weight: 300;
 }
 
-.course-data {
+.account-data {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-content: center;
     width: fill-available;
 }
 
-.course-text {
+.account-text {
     padding: 1rem;
     font-size: large;
-    font-weight: 200;
-}
-
-.course-header {
-    padding: 1rem;
-    text-align: center;
-    font-size: xx-large;
     font-weight: 200;
 }
 
@@ -36,6 +30,11 @@
     display: flex;
     flex-direction: row;
     width: fill-available;
+}
+
+.account-ut-link {
+    align-self: center;
+    padding: 1rem;
 }
 
 .header {

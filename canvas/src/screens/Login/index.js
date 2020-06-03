@@ -1,13 +1,13 @@
 // improt { v4 as uuidv4 } from 
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory, withRouter } from 'react-router-dom';
+// import { Link, useHistory, withRouter } from 'react-router-dom';
 import { Field, reduxForm, Form } from 'redux-form';
 
 import './styles.css';
 import * as actions from '../../actions/auth';
 import * as selectors from '../../reducers';
-import { select } from 'redux-saga/effects';
+// import { select } from 'redux-saga/effects';
 
 const renderInput = ({ input, label, type, meta: { touched, error } }) => (
     <Fragment>
