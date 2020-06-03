@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/studentCourses';
 import CourseCard from '../CourseCard';

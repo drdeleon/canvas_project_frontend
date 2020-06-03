@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+// import * as selectors from '../../reducers';
+// import * as actions from '../../actions/studentCourses';
+
 import './styles.css';
 
 const Test = ({}) => {

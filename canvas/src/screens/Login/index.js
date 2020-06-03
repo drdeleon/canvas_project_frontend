@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link, useHistory, withRouter } from 'react-router-dom';
 import { Field, reduxForm, Form } from 'redux-form';
 
-
 import './styles.css';
 import * as actions from '../../actions/auth';
 import * as selectors from '../../reducers';
@@ -95,7 +94,7 @@ export default connect(
         form: 'loginForm',
         onSubmit(values, dispatch) {
             dispatch(actions.startLogin(values.username, values.email, values.password));
-            console.log(values.username, values.email, values.password);
+            history.push('/user-type')
         },
         validate(values) {
             const error = {};
