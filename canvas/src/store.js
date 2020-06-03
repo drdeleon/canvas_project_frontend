@@ -15,7 +15,7 @@ export const configureStore = () => {
     const persistedReducer = persistReducer({
             key: 'root',
             storage,
-            whitelist: ['auth'],
+            whitelist: ['auth', 'userType', 'courses'],
         },
         reducer,
     );

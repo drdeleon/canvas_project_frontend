@@ -7,6 +7,8 @@ import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/navbar';
 
+import * as authActions from '../../actions/auth';
+
 const NavBar = ({ selectNavbarElement }) => {
     return (
         <Fragment>
@@ -37,6 +39,9 @@ export default connect(
     dispatch => ({
         selectNavbarElement(index) {
             dispatch(actions.selectNavbarElement(index));
+        },
+        logout(){
+            dispatch(authActions.logout());
         },
     })
     )(NavBar);

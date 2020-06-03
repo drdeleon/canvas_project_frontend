@@ -5,9 +5,8 @@ import auth, * as authSelectors from './auth';
 import userType, * as userTypeSelectors from './userType';
 import assignment, * as assignmentsSelectors from './assignment';
 import navbar, * as navbarSelectors from './navbar';
-import studentCourses, * as studentCoursesSelectors from './studentCourses';
-import professorCourses, * as professorCoursesSelectors from './professorCourses';
-import announcement,* as announcementSelectors from './announcement';
+import courses, * as coursesSelectors from './courses';
+import announcement, * as announcementSelectors from './announcement';
 
 const reducer = combineReducers({
     //reductores
@@ -15,8 +14,7 @@ const reducer = combineReducers({
     userType,
     assignment,
     navbar,
-    studentCourses,
-    professorCourses,
+    courses,
     announcement,
     form: formReducer,
 });
@@ -53,23 +51,14 @@ export const getAssignmentError = state => assignmentsSelectors.getAssignmentErr
 // NAVBAR SELECTORS
 export const getSelectedNavbarElement = state => navbarSelectors.getSelectedNavbarElement(state.navbar);
 
-// STUDENT COURSES SELECTORS
-export const getStudentCourse = (state, id) => studentCoursesSelectors.getStudentCourse(state.studentCourses, id);
-export const getStudentCourses = state => studentCoursesSelectors.getStudentCourses(state.studentCourses);
-export const getIsFetchingStudentCourses = state => studentCoursesSelectors.getIsFetchingStudentCourses(state.studentCourses);
-export const getIsCreatingStudentCourse = state => studentCoursesSelectors.getIsCreatingStudentCourse(state.studentCourses);
-export const getIsRemovingStudentCourse = state => studentCoursesSelectors.getIsRemovingStudentCourse(state.studentCourses);
-export const getIsEditingStudentCourse = state => studentCoursesSelectors.getIsEditingStudentCourse(state.studentCourses);
-export const getStudentCoursesError = state => studentCoursesSelectors.getStudentCoursesError(state.studentCourses);
-
-// PROFESSOR COURSES SELECTORS
-export const getProfessorCourse = (state, id) => professorCoursesSelectors.getProfessorCourse(state.professorCourses, id);
-export const getProfessorCourses = state => professorCoursesSelectors.getProfessorCourses(state.professorCourses);
-export const getIsFetchingProfessorCourses = state => professorCoursesSelectors.getIsFetchingProfessorCourses(state.professorCourses);
-export const getIsCreatingProfessorCourse = state => professorCoursesSelectors.getIsCreatingProfessorCourse(state.professorCourses);
-export const getIsRemovingProfessorCourse = state => professorCoursesSelectors.getIsRemovingProfessorCourse(state.professorCourses);
-export const getIsEditingProfessorCourse = state => professorCoursesSelectors.getIsEditingProfessorCourse(state.professorCourses);
-export const getProfessorCoursesError = state => professorCoursesSelectors.getProfessorCoursesError(state.professorCourses);
+// COURSES SELECTORS
+export const getCourse = (state, id) => coursesSelectors.getCourse(state.courses, id);
+export const getCourses = state => coursesSelectors.getCourses(state.courses);
+export const getIsFetchingCourses = state => coursesSelectors.getIsFetchingCourses(state.courses);
+export const getIsCreatingCourse = state => coursesSelectors.getIsCreatingCourse(state.courses);
+export const getIsRemovingCourse = state => coursesSelectors.getIsRemovingCourse(state.courses);
+export const getIsEditingCourse = state => coursesSelectors.getIsEditingCourse(state.courses);
+export const getCoursesError = state => coursesSelectors.getCoursesError(state.courses);
 
 // ANNOUNCEMENT SELECTORS
 export const getAnnouncement = (state, id) => announcementSelectors.getAnnouncement(state.announcement, id);

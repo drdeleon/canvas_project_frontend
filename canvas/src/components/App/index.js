@@ -19,6 +19,7 @@ import Account from '../../screens/Account';
 import Dashboard from '../../screens/Dashboard';
 import Courses from '../../screens/Courses';
 import UserType from '../../screens/UserType';
+import Course from '../../screens/Course';
 
 export const history = createBrowserHistory();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route exact path='/user-type' component={UserType} />
             <Route exact path='/account' component={Account} />
             <Route exact path='/courses' component={Courses} />
+            <Route path='/courses/:id' component={Course} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/assignments' component={AssignmentsList} />
             <Route exact path='/new-assignment' component={NewAssignmentForm} />

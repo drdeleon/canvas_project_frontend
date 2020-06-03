@@ -1,0 +1,31 @@
+.course-container {
+    display: flex;
+    flex-direction: column;
+    width: fill-available;
+}
+
+.course-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fill-available;
+    background-color: #aaa;
+    font-weight: 300;
+}
+
+.course-data {
+    display: flex;
+    flex-direction: row;
+    width: fill-available;
+}
+
+.route-screen {
+    display: flex;
+    flex-direction: row;
+    width: fill-available;
+}
+
+.header {
+    font-weight: 300;
+}

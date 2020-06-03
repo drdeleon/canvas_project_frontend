@@ -14,6 +14,7 @@ import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
 import * as actions from '../actions/auth';
 import * as types from '../types/auth';
+import { history } from '../components/App';
 
 
 function* login(action) {
@@ -46,8 +47,8 @@ function* login(action) {
                 );
                 if (userResponse.status === 200) {
                     const user = yield userResponse.json();
-                    console.log(user);
                     yield put(actions.completeLogin(token, user));
+                    history.push('/user-type');
                 } else {
                     const { non_field_errors } = yield response.json();
                     yield put(actions.failLogin(non_field_errors[0]));

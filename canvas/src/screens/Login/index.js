@@ -8,7 +8,6 @@ import './styles.css';
 import * as actions from '../../actions/auth';
 import * as selectors from '../../reducers';
 import { select } from 'redux-saga/effects';
-import { history } from '../../components/App';
 
 const renderInput = ({ input, label, type, meta: { touched, error } }) => (
     <Fragment>
@@ -94,7 +93,6 @@ export default connect(
         form: 'loginForm',
         onSubmit(values, dispatch) {
             dispatch(actions.startLogin(values.username, values.email, values.password));
-            history.push('/user-type')
         },
         validate(values) {
             const error = {};

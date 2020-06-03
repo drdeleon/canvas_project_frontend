@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import omit from 'lodash/omit';
 import union from 'lodash/union';
 
-import * as types from '../types/professorCourses';
+import * as types from '../types/courses';
 
 /* 
     FORMA REDUCTOR:
@@ -16,8 +16,8 @@ import * as types from '../types/professorCourses';
 */
 
 const byId = (state = {}, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSES_FETCH_COMPLETED:
+    switch (action.type) {
+        case types.COURSES_FETCH_COMPLETED:
             {
                 const { entities, order } = action.payload;
                 const newState = {...state };
@@ -31,23 +31,23 @@ const byId = (state = {}, action) => {
                 return newState;
             }
 
-        case types.PROFESSOR_COURSE_ADD_COMPLETED:
+        case types.COURSE_ADD_COMPLETED:
             {
-                const professorCourses = action.payload;
+                const courses = action.payload;
 
-                state[professorCourses.id] = {
-                    ...professorCourses,
+                state[courses.id] = {
+                    ...courses,
                 }
 
                 return state;
             }
 
-        case types.PROFESSOR_COURSE_REMOVE_COMPLETED:
+        case types.COURSE_REMOVE_COMPLETED:
             {
                 return omit(state, action.payload.id);
             }
 
-        case types.PROFESSOR_COURSE_EDIT_COMPLETED:
+        case types.COURSE_EDIT_COMPLETED:
             {
                 return {
                     ...state,
@@ -66,18 +66,18 @@ const byId = (state = {}, action) => {
 };
 
 const order = (state = [], action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSES_FETCH_COMPLETED:
+    switch (action.type) {
+        case types.COURSES_FETCH_COMPLETED:
             {
                 return union(action.payload.order);
             }
 
-        case types.PROFESSOR_COURSE_ADD_COMPLETED:
+        case types.COURSE_ADD_COMPLETED:
             {
                 return [...state, action.payload.id];
             }
 
-        case types.PROFESSOR_COURSE_REMOVE_COMPLETED:
+        case types.COURSE_REMOVE_COMPLETED:
             {
                 return state.filter(id => id !== action.payload.id);
             }
@@ -90,14 +90,14 @@ const order = (state = [], action) => {
 };
 
 const isFetching = (state = false, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSES_FETCH_STARTED:
+    switch (action.type) {
+        case types.COURSES_FETCH_STARTED:
             {
                 return true;
             }
 
-        case types.PROFESSOR_COURSES_FETCH_COMPLETED:
-        case types.PROFESSOR_COURSES_FETCH_FAILED:
+        case types.COURSES_FETCH_COMPLETED:
+        case types.COURSES_FETCH_FAILED:
             {
                 return false;
             }
@@ -110,14 +110,14 @@ const isFetching = (state = false, action) => {
 };
 
 const isCreating = (state = false, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSE_ADD_STARTED:
+    switch (action.type) {
+        case types.COURSE_ADD_STARTED:
             {
                 return true;
             }
 
-        case types.PROFESSOR_COURSE_ADD_COMPLETED:
-        case types.PROFESSOR_COURSE_ADD_FAILED:
+        case types.COURSE_ADD_COMPLETED:
+        case types.COURSE_ADD_FAILED:
             {
                 return false;
             }
@@ -130,14 +130,14 @@ const isCreating = (state = false, action) => {
 };
 
 const isRemoving = (state = false, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSE_REMOVE_STARTED:
+    switch (action.type) {
+        case types.COURSE_REMOVE_STARTED:
             {
                 return true;
             }
 
-        case types.PROFESSOR_COURSE_REMOVE_COMPLETED:
-        case types.PROFESSOR_COURSE_REMOVE_FAILED:
+        case types.COURSE_REMOVE_COMPLETED:
+        case types.COURSE_REMOVE_FAILED:
             {
                 return false;
             }
@@ -150,14 +150,14 @@ const isRemoving = (state = false, action) => {
 };
 
 const isEditing = (state = false, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSE_EDIT_STARTED:
+    switch (action.type) {
+        case types.COURSE_EDIT_STARTED:
             {
                 return true;
             }
 
-        case types.PROFESSOR_COURSE_EDIT_COMPLETED:
-        case types.PROFESSOR_COURSE_EDIT_FAILED:
+        case types.COURSE_EDIT_COMPLETED:
+        case types.COURSE_EDIT_FAILED:
             {
                 return false;
             }
@@ -170,34 +170,34 @@ const isEditing = (state = false, action) => {
 };
 
 const error = (state = null, action) => {
-    switch (action.payload) {
-        case types.PROFESSOR_COURSES_FETCH_STARTED:
-        case types.PROFESSOR_COURSES_FETCH_COMPLETED:
-        case types.PROFESSOR_COURSE_ADD_STARTED:
-        case types.PROFESSOR_COURSE_ADD_COMPLETED:
-        case types.PROFESSOR_COURSE_REMOVE_STARTED:
-        case types.PROFESSOR_COURSE_REMOVE_COMPLETED:
-        case types.PROFESSOR_COURSE_EDIT_STARTED:
-        case types.PROFESSOR_COURSE_EDIT_COMPLETED:
+    switch (action.type) {
+        case types.COURSES_FETCH_STARTED:
+        case types.COURSES_FETCH_COMPLETED:
+        case types.COURSE_ADD_STARTED:
+        case types.COURSE_ADD_COMPLETED:
+        case types.COURSE_REMOVE_STARTED:
+        case types.COURSE_REMOVE_COMPLETED:
+        case types.COURSE_EDIT_STARTED:
+        case types.COURSE_EDIT_COMPLETED:
             {
                 return null;
             }
-        case types.PROFESSOR_COURSES_FETCH_FAILED:
+        case types.COURSES_FETCH_FAILED:
             {
                 return action.payload.error;
             }
 
-        case types.PROFESSOR_COURSE_ADD_FAILED:
+        case types.COURSE_ADD_FAILED:
             {
                 return action.payload.error;
             }
 
-        case types.PROFESSOR_COURSE_EDIT_FAILED:
+        case types.COURSE_EDIT_FAILED:
             {
                 return action.payload.error;
             }
 
-        case types.PROFESSOR_COURSE_REMOVE_FAILED:
+        case types.COURSE_REMOVE_FAILED:
             {
                 return action.payload.error;
             }
@@ -209,7 +209,7 @@ const error = (state = null, action) => {
     };
 };
 
-const professorCourses = combineReducers({
+const courses = combineReducers({
     byId,
     order,
     isFetching,
@@ -219,12 +219,12 @@ const professorCourses = combineReducers({
     error,
 });
 
-export default professorCourses;
+export default courses;
 
-export const getProfessorCourse = (state, id) => state.byId[id];
-export const getProfessorCourses = state => state.order.map(id => getProfessorCourse(state, id));
-export const getIsFetchingProfessorCourses = state => state.isFetching;
-export const getIsCreatingProfessorCourse = state => state.isCreating;
-export const getIsRemovingProfessorCourse = state => state.isRemoving;
-export const getIsEditingProfessorCourse = state => state.isEditing;
-export const getProfessorCoursesError = state => state.error;
+export const getCourse = (state, id) => state.byId[id];
+export const getCourses = state => state.order.map(id => getCourse(state, id));
+export const getIsFetchingCourses = state => state.isFetching;
+export const getIsCreatingCourse = state => state.isCreating;
+export const getIsRemovingCourse = state => state.isRemoving;
+export const getIsEditingCourse = state => state.isEditing;
+export const getCoursesError = state => state.error;

@@ -11,22 +11,46 @@ import { normalize } from 'normalizr';
 
 import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
-import * as actions from '../actions/studentCourses';
-import * as types from '../types/studentCourses';
+import * as actions from '../actions/courses';
+import * as authActions from '../actions/auth';
+import * as types from '../types/courses';
 import * as schemas from '../schemas/courses';
 
 
-function* fetchStudentCourses(action) {
+function* fetchCourses(action) {
     try {
         const isAuth = yield select(selectors.getIsAuthenticated);
 
         if (isAuth) {
             const token = yield select(selectors.getAuthToken);
+            const userType = yield select(selectors.getSelectedUserType);
             const user = yield select(selectors.getLoggedUser);
+
+            let url = yield `${API_BASE_URL}/`
+            switch (userType) {
+                case 0:
+                    {
+                        url += `students/${user.student}/courses/`
+                        break;
+                    }
+                case 1:
+                    {
+                        url += `professors/${user.professor}/courses/`
+                        break;
+                    }
+                case 2:
+                    {
+                        url += `assistants/${user.assistant}/courses/`
+                        break;
+                    }
+                default:
+                    url += `students/${user.student}/courses/`
+                    break;
+            }
 
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/students/${user.student}/courses/`, {
+                url, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,25 +67,25 @@ function* fetchStudentCourses(action) {
                 } = normalize(jsonResult, schemas.courses);
 
 
-                yield put(actions.completeFetchingStudentCourses(courses, result));
+                yield put(actions.completeFetchingCourses(courses, result));
             } else {
-                // const { non_field_errors } = yield response.json();
-                // yield put(actions.failLogin(non_field_errors[0]));
+                const { non_field_errors } = yield response.json();
+                yield put(authActions.failLogin(non_field_errors[0]));
             }
         }
     } catch (error) {
-        yield put(actions.failFetchingStudentCourses('Error en la conexión con el servidor.'));
+        yield put(actions.failFetchingCourses('Error en la conexión con el servidor.'));
     }
 };
 
-export function* watchStudentCoursesFetch() {
+export function* watchCoursesFetch() {
     yield takeEvery(
-        types.STUDENT_COURSES_FETCH_STARTED,
-        fetchStudentCourses,
+        types.COURSES_FETCH_STARTED,
+        fetchCourses,
     );
 };
 
-// function* addStudentCourse(action) {
+// function* addCourse(action) {
 //     try {
 //         const isAuth = yield select(selectors.isAuthenticated);
 
@@ -82,7 +106,7 @@ export function* watchStudentCoursesFetch() {
 //             if (response.status === 201) {
 //                 const jsonResult = yield response.json();
 //                 yield put(
-//                     actions.completeAddingStudentCourse(
+//                     actions.completeAddingCourse(
 //                         action.payload.id,
 //                         jsonResult,
 //                     ),
@@ -108,14 +132,14 @@ export function* watchStudentCoursesFetch() {
 //     }
 // };
 
-// export function* watchAddStudentCourse() {
+// export function* watchAddCourse() {
 //     yield takeEvery(
 //         types.STUDENT_COURSE_ADD_STARTED,
-//         addStudentCourse,
+//         addCourse,
 //     );
 // };
 
-// function* removeStudentCourse(action) {
+// function* removeCourse(action) {
 //     try {
 //         const isAuth = yield select(selectors.isAuthenticated);
 
@@ -133,7 +157,7 @@ export function* watchStudentCoursesFetch() {
 //             );
 
 //             if (response.status === 200) {
-//                 yield put(actions.completeRemovingStudentCourse());
+//                 yield put(actions.completeRemovingCourse());
 //                 // const {
 //                 //   entities: { studentCourses },
 //                 //   result,
@@ -155,9 +179,9 @@ export function* watchStudentCoursesFetch() {
 //     }
 // };
 
-// export function* watchRemoveStudentCourse() {
+// export function* watchRemoveCourse() {
 //     yield takeEvery(
 //         types.STUDENT_COURSE_REMOVE_STARTED,
-//         removeStudentCourse,
+//         removeCourse,
 //     );
 // };

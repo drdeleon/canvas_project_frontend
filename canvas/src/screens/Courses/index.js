@@ -1,36 +1,40 @@
-import React, { Fragment } from 'react';
+import NavBar from '../../components/NavBar';
+
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
-// import * as actions from '../../actions/studentCourses';
-import StudentCourses from '../../components/StudentCourses';
-import ProfessorCourses from '../../components/ProfessorCourses';
+import * as actions from '../../actions/courses';
+import CourseCard from '../../components/CourseCard';
 
-const Courses = ({ isStudent, isProfessor, isAssistant, }) => {
+import './styles.css';
 
-    const divStyle = {
-        display: 'flex',
-        flexDirection: 'row',
-      };
-
+const Courses = ({courses, isLoading, onLoad}) => {
+    useEffect(onLoad, []);
     return (
         <Fragment>
-            <div style={divStyle}>
+            <div className="route-screen">
                 <NavBar />
                 {
-                    isStudent && (
-                        <StudentCourses />
-                    )
+                    courses.length <= 0 && !isLoading && (
+                        <h1 className='header'> No hay cursos asignados </h1>
+                        )
+                    }
+                {
+                    isLoading && (
+                        <div className='header'> Cargando... </div>
+                        )
                 }
                 {
-                    isProfessor && (
-                        <ProfessorCourses />
-                    )
-                }
-                {
-                    isAssistant && (
-                        <StudentCourses />
+                    courses.length > 0 && !isLoading && (
+                        <div className='container'>
+                            <div className='header'> CURSOS </div>
+                            <div className='student-courses-container'>
+                                {
+                                    courses.map(({id, name, section, year, cicle}) => <CourseCard key={id} id={id} name={name} section={section} year={year} cicle={cicle}/>)
+                                }
+                            </div>
+                        </div>
                     )
                 }
             </div>
@@ -40,9 +44,13 @@ const Courses = ({ isStudent, isProfessor, isAssistant, }) => {
 
 export default connect(
     state => ({
-        isStudent: selectors.getSelectedUserType(state) === 0,
-        isProfessor: selectors.getSelectedUserType(state) === 1,
-        isAssistant: selectors.getSelectedUserType(state) === 2,
+        courses: selectors.getCourses(state),
+        isLoading: selectors.getIsFetchingCourses(state),
     }),
-    dispatch => ({}),
+    dispatch => ({
+        onLoad(){
+            dispatch(actions.startFetchingCourses());
+        },
+    }),
     )(Courses);
+    

@@ -179,7 +179,6 @@ const user = (state = null, action) => {
 
         case types.AUTHENTICATION_COMPLETED:
             {
-                console.log(action.payload.user);
                 return action.payload.user;
             }
 
