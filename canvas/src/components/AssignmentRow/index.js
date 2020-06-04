@@ -7,6 +7,7 @@ import * as actions from '../../actions/assignments';
 
 const AssignmentRow = ({ title, course, deadline, score }) => (
     <Fragment>
+        
         <tr className="assignment-row">
             <td>{ title }</td>
             <td>{ course }</td>

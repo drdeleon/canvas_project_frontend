@@ -1,7 +1,9 @@
 import * as types from '../types/announcements';
-
-export const startFetchingAnnouncements = () => ({
+import { announcement } from '../schemas/announcements';
+// COURSE ANNOUNCEMENTS FETCH
+export const startFetchingAnnouncements = (courseId) => ({
     type: types.ANNOUNCEMENTS_FETCH_STARTED,
+    payload: courseId,
 });
 
 export const completeFetchingAnnouncements = (entities, order) => ({
@@ -16,30 +18,33 @@ export const failFetchingAnnouncements = error => ({
     type: types.ANNOUNCEMENTS_FETCH_FAILED,
 });
 
-export const startFetchingAnnouncement = announcement => ({
+// ANNOUNCEMENT FETCH
+export const startFetchingAnnouncement = id => ({
     type: types.ANNOUNCEMENT_FETCH_STARTED,
-    payload: announcement,
-});
-
-export const completeFetchingAnnouncement = (entities, order) => ({
-    type: types.ANNOUNCEMENT_FETCH_COMPLETED,
     payload: {
-        entities,
-        order,
+        id,
     },
 });
 
-export const failFetchingAnnouncement = (announcement, error) => ({
+export const completeFetchingAnnouncement = announcement => ({
+    type: types.ANNOUNCEMENT_FETCH_COMPLETED,
+    payload: announcement,
+});
+
+export const failFetchingAnnouncement = (error) => ({
     type: types.ANNOUNCEMENT_FETCH_FAILED,
     payload: {
-        announcement,
         error,
     },
 });
 
-export const startAddingAnnouncement = announcement => ({
+// COURSE ANNOUNCEMENT ADD
+export const startAddingAnnouncement = (courseId, announcement) => ({
     type: types.ANNOUNCEMENT_ADD_STARTED,
-    payload: announcement,
+    payload: {
+        courseId,
+        announcement,
+    },
 });
 
 export const completeAddingAnnouncement = (oldId, announcement) => ({
@@ -58,10 +63,12 @@ export const failAddingAnnouncement = (oldId, error) => ({
     },
 });
 
-export const startRemovingAnnouncement = id => ({
+// COURSE ANNOUNCEMENT REMOVE 
+export const startRemovingAnnouncement = (courseId, title) => ({
     type: types.ANNOUNCEMENT_REMOVE_STARTED,
     payload: {
-        id,
+        courseId,
+        title,
     },
 });
 

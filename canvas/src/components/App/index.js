@@ -46,10 +46,10 @@ const App = () => (
             <Route path='/courses/:id/announcements' component={CourseAnnouncementsScreen} />
             <Route path='/courses/:id/assignments' component={CourseAssignmentsScreen} />
             <Route exact path='/dashboard' component={Dashboard} />
-            <Route path='courses/:id/assignments' component={AssignmentsList} />
-            <Route path='courses/:id/new-assignment' component={NewAssignmentForm} />
-            <Route path='courses/:id/announcements' component={AnnouncementsList} />
-            <Route path='courses/:id/new-announcement' component={NewAnnouncementForm} />
+            <Route path='/courses/:id/assignments' component={AssignmentsList} />
+            <Route path='/courses/:id/new-assignment' component={NewAssignmentForm} />
+            <Route path='/courses/:id/announcements' component={AnnouncementsList} />
+            <Route path='/courses/:id/new-announcement' component={NewAnnouncementForm} />
         </Switch>
       </PersistGate>
     </Router>
