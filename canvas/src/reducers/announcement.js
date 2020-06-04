@@ -5,16 +5,6 @@ import union from 'lodash/union';
 import * as types from '../types/announcements';
 import { getAssignments } from './assignments';
 
-/*
-    FORMA REDUCTOR:
-        order
-        byId
-        isFetching
-        isCreating
-        isRemoving
-        error
-*/
-
 
 const byId = (state = {}, action) => {
     switch (action.type) {

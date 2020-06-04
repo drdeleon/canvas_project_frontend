@@ -17,11 +17,11 @@ const CourseAssignmentsScreen = ({ match, assignments, course, isLoading, user, 
         <Fragment>
             <div className='route-screen'>
                 <NavBar />
-                <div className="course-container">
+                <div className="course-asgnmt-container">
                     <div className="header"> {user.username} </div>
-                    <div className="course-data">
+                    <div className="course-asgnmt-data">
                         <CourseNavbar id={course.id} />
-                        <div className="course-description">
+                        <div className="course-asgnmt-description">
                             <Fragment>
                                 {
                                     assignments.length === 0 && !isLoading && (
@@ -38,7 +38,7 @@ const CourseAssignmentsScreen = ({ match, assignments, course, isLoading, user, 
                                 }
                                 {
                                     assignments.length > 0 && !isLoading && (
-                                        <table>
+                                        <table className='course-asgnmt-table'>
                                             <thead className='table-header'>
                                                 <th>Nombre</th>
                                                 <th>Curso</th>

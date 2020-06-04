@@ -1,10 +1,10 @@
-.course-container {
+.course-asgnmt-container {
     display: flex;
     flex-direction: column;
     width: fill-available;
 }
 
-.course-description {
+.course-asgnmt-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,23 +13,28 @@
     font-weight: 300;
 }
 
-.course-data {
+.course-asgnmt-data {
     display: flex;
     flex-direction: row;
     width: fill-available;
 }
 
-.course-text {
+.course-asgnmt-text {
     padding: 1rem;
     font-size: large;
     font-weight: 200;
 }
 
-.course-header {
+.course-asgnmt-header {
     padding: 1rem;
     text-align: center;
     font-size: xx-large;
     font-weight: 200;
+}
+
+.course-asgnmt-table {
+    width: fill-available;
+    margin: 2rem;
 }
 
 .route-screen {

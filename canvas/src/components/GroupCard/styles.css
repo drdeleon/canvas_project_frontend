@@ -1,0 +1,44 @@
+.course-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15rem;
+    height: 5rem;
+    background-color: rgb(188, 110, 237);
+    border-radius: 0.25rem;
+    box-shadow: 1px 1px 5px #888888;
+    margin: 1rem;
+}
+
+.course-card-container:hover {
+    box-shadow: 1px 1px 10px #888888;
+}
+
+.course-card-name {
+    white-space: nowrap;
+    width: fill-available;
+    text-align: center;
+    font-size: large;
+    padding-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course-card-info {
+    font-size: small;
+}
+
+.course-card-footer {
+    padding: 0.5rem;
+    justify-self: flex-end;
+    background-color: #fff;
+    height: 4rem;
+    width: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.course-card-img {
+    height: 100%;
+}

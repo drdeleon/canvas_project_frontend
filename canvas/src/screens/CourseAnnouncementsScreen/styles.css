@@ -1,10 +1,10 @@
-.course-container {
+.course-anncmt-container {
     display: flex;
     flex-direction: column;
     width: fill-available;
 }
 
-.course-description {
+.course-anncmt-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,19 +13,19 @@
     font-weight: 300;
 }
 
-.course-data {
+.course-anncmt-data {
     display: flex;
     flex-direction: row;
     width: fill-available;
 }
 
-.course-text {
+.course-anncmt-text {
     padding: 1rem;
     font-size: large;
     font-weight: 200;
 }
 
-.course-header {
+.course-anncmt-header {
     padding: 1rem;
     text-align: center;
     font-size: xx-large;
@@ -42,9 +42,14 @@
     font-weight: 300;
 }
 
+.course-anncmt-table {
+    width: fill-available;
+    margin: 2rem;
+}
+
 .up {
     margin-top: 25px;
-    background-color:  transparent;
+    background-color: transparent;
     color: rgb(49, 162, 100);
     border-color: rgb(49, 162, 100);
     border-radius: 5px;
@@ -59,4 +64,3 @@
     color: white;
     border-color: white;
 }
-
