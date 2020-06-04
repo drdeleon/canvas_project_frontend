@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/assignments';
 import AssignmentRow from '../AssignmentRow';
@@ -25,6 +26,12 @@ const AssignmentsList = ({ assignments, isLoading, onLoad }) => {
             {
                 assignments.length > 0 && !isLoading && (
                     <table>
+                        <thead className='table-header'>
+                            <th>Nombre</th>
+                            <th>Curso</th>
+                            <th>Fecha</th>
+                            <th>Puntos</th>
+                        </thead>
                         <tbody>
                             {
                                 assignments.map(({ id }) => 

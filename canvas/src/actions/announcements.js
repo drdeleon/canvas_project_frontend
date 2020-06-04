@@ -38,12 +38,12 @@ export const failFetchingAnnouncement = (announcement, error) => ({
 });
 
 export const startAddingAnnouncement = announcement => ({
-    type: types.ANNOUNCEMENTS_ADD_STARTED,
+    type: types.ANNOUNCEMENT_ADD_STARTED,
     payload: announcement,
 });
 
 export const completeAddingAnnouncement = (oldId, announcement) => ({
-    type: types.ANNOUNCEMENTS_ADD_COMPLETED,
+    type: types.ANNOUNCEMENT_ADD_COMPLETED,
     payload: {
         oldId,
         announcement,
@@ -51,7 +51,7 @@ export const completeAddingAnnouncement = (oldId, announcement) => ({
 });
 
 export const failAddingAnnouncement = (oldId, error) => ({
-    type: types.ANNOUNCEMENTS_ADD_FAILED,
+    type: types.ANNOUNCEMENT_ADD_FAILED,
     payload: {
         oldId,
         error,
@@ -59,18 +59,18 @@ export const failAddingAnnouncement = (oldId, error) => ({
 });
 
 export const startRemovingAnnouncement = id => ({
-    type: types.ANNOUNCEMENTS_REMOVE_STARTED,
+    type: types.ANNOUNCEMENT_REMOVE_STARTED,
     payload: {
         id,
     },
 });
 
 export const completeRemovingAnnouncement = () => ({
-    type: types.ANNOUNCEMENTS_REMOVE_COMPLETED,
+    type: types.ANNOUNCEMENT_REMOVE_COMPLETED,
 });
 
 export const failRemovingAnnouncement = (id, error) => ({
-    type: types.ANNOUNCEMENTS_REMOVE_FAILED,
+    type: types.ANNOUNCEMENT_REMOVE_FAILED,
     payload: {
         id,
         error,

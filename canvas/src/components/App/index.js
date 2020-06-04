@@ -14,6 +14,9 @@ import {
 import LogIn from '../../screens/Login';
 import AssignmentsList from '../AssignmentsList';
 import NewAssignmentForm from '../NewAssignmentForm';
+import AnnouncementsList from '../AnnouncementsList';
+import NewAnnouncementForm from '../NewAnnouncementForm';
+
 
 import Account from '../../screens/Account';
 import Dashboard from '../../screens/Dashboard';
@@ -43,8 +46,10 @@ const App = () => (
             <Route path='/courses/:id/announcements' component={CourseAnnouncementsScreen} />
             <Route path='/courses/:id/assignments' component={CourseAssignmentsScreen} />
             <Route exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/assignments' component={AssignmentsList} />
-            <Route exact path='/new-assignment' component={NewAssignmentForm} />
+            <Route path='courses/:id/assignments' component={AssignmentsList} />
+            <Route path='courses/:id/new-assignment' component={NewAssignmentForm} />
+            <Route path='courses/:id/announcements' component={AnnouncementsList} />
+            <Route path='courses/:id/new-announcement' component={NewAnnouncementForm} />
         </Switch>
       </PersistGate>
     </Router>

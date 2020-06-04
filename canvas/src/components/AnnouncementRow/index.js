@@ -1,20 +1,21 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/announcements';
 
 const AannouncementRow = ({ title, course, description }) => (
     <Fragment>
-        <tr className="announcements-row">
+        <tr>
             <td>{ title }</td>
             <td>{ course }</td>
             <td>{ description }</td>
             <td>
-                <button //onClick={seeAssignment}
+                {/* <button //onClick={seeAssignment}
                 >
                     {'Ver'}
-                </button>
+                </button> */}
             </td>
         </tr>
     </Fragment>

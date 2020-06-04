@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/announcements';
 import AnnouncementRow from '../AnnouncementRow';
@@ -26,6 +27,11 @@ const AnnouncementsList = ({ announcements, isLoading, onLoad }) => {
             {
                 announcements.length > 0 && !isLoading && (
                     <table>
+                        <thead className='table-header'>
+                            <th>Título</th>
+                            <th>Curso</th>
+                            <th>Descripción</th>
+                        </thead>
                         <tbody>
                             {
                                 announcements.map(({ id }) => 
