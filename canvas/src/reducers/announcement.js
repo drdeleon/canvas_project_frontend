@@ -32,20 +32,6 @@ const byId = (state = {}, action) => {
                 return newState;
             }
 
-        case types.ANNOUNCEMENT_FETCH_STARTED:
-            {
-                const { entities, order } = action.payload;
-                const newState = {...state };
-
-                order.forEach(id => {
-                    newState[id] = {
-                        ...entities[id],
-                    };
-                });
-
-                return newState;
-            }
-
         case types.ANNOUNCEMENT_ADD_COMPLETED:
             {
                 const announcement = action.payload;
@@ -76,11 +62,6 @@ const order = (state = [], action) => {
                 return union(action.payload.id);
             }
 
-        case types.ANNOUNCEMENT_FETCH_COMPLETED:
-            {
-                return union(action.payload.id);
-            }
-
         case types.ANNOUNCEMENT_ADD_COMPLETED:
             {
                 return [...state, action.payload.id];
@@ -96,6 +77,18 @@ const order = (state = [], action) => {
                 return state;
             }
     };
+};
+
+const selected = (state = null, action) => {
+    switch (action.type) {
+        case types.ANNOUNCEMENT_FETCH_STARTED:
+            {
+                return action.payload;
+            }
+
+        default:
+            return state;
+    }
 };
 
 const isFetching = (state = false, action) => {
@@ -260,6 +253,7 @@ export default combineReducers({
     byId,
     isFetching,
     isCreating,
+    selected,
     isRemoving,
     error,
 });
@@ -270,3 +264,4 @@ export const getIsFetchingAnnouncement = state => state.isFetching;
 export const getIsCreatingAnnouncement = state => state.isCreating;
 export const getIsRemovingAnnouncement = state => state.isRemoving;
 export const getAnnouncementError = state => state.error;
+export const getSelectedAnnouncement = state => state.selected;

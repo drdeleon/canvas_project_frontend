@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, Form, formValueSelector } from 'redux-form';
 
 import './styles.css';
+
+import CourseNavbar from '../../components/CourseNavbar';
+import NavBar from '../../components/NavBar';
+
 import * as actions from '../../actions/announcements';
 import * as selectors from '../../reducers';
 
@@ -27,14 +31,15 @@ const renderInput = ({ input, label, type, className, meta: { touched, error } }
     </Fragment>
 );
 
-const renderDesc = ({ textarea, label, type, rows, cols, meta: { touched, error } }) => (
+const renderDesc = ({ input, label, type, rows, cols, className, meta: { touched, error } }) => (
     <Fragment>
         <div>
             <label>{ label }</label>
             <div>
                 <textarea
-                    {...textarea}
+                    {...input}
                     placeholder={ label }
+                    className={ className }
                     type={ type }
                     rows={ rows }
                     cols = { cols }
@@ -52,36 +57,49 @@ const NewAnnouncementForm = ({
     handleSubmit,
     error = null,
     isCreating = false,
+    course
 }) => {
 
     return (
         <Fragment>
-            <div className='container'>
-                <h1>{'NUEVO ANUNCIO'}</h1>
-
-                <div className='new-announcement-container'>
-                    <Form onSubmit={handleSubmit}>
-                        <Field
-                            name='title'
-                            type='text'
-                            component={ renderInput }
-                            label='Nombre'
-                            className='announcement-name'
-                        />
-                        <Field
-                            name='description'
-                            type='textarea'
-                            component={ renderDesc }
-                            label='Descripción'
-                            rows='5'
-                            cols='90'
-                        />
-                        <p>
-                            <button className='create-button' type='submit'>
-                                {'Crear'}
-                            </button>
-                        </p>
-                    </Form>
+            <div className='route-screen'>
+                <NavBar />
+                <div className="course-container">
+                    <div className="header">Anuncios</div>
+                    <div className="course-data">
+                        <CourseNavbar id={course.id} />
+                        <div className="course-description">
+                            <div className='course-header'> Nuevo Anuncio</div>
+                            <div className='course-text'> Ciclo {course.cicle} - {course.year}</div>
+                            <Fragment>
+                                <div className='new-announcement-container'>
+                                    <Form onSubmit={handleSubmit}>
+                                        <Field
+                                            name='title'
+                                            type='text'
+                                            component={ renderInput }
+                                            label='Nombre'
+                                            className='announcement-name'
+                                        />
+                                        <Field
+                                            name='body'
+                                            type='textarea'
+                                            component={ renderDesc }
+                                            label='Mensaje'
+                                            rows='5'
+                                            cols='90'
+                                            className='announcement-name'
+                                        />
+                                        <p>
+                                            <button className='up' type='submit'>
+                                                {'Crear'}
+                                            </button>
+                                        </p>
+                                    </Form>
+                                </div>
+                            </Fragment>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Fragment>
@@ -89,22 +107,30 @@ const NewAnnouncementForm = ({
 };
 
 export default connect(
-    state => ({
+    (state, { match }) => ({
+        course: selectors.getCourse(state, match.params.id),
         error: selectors.getAnnouncementError(state),
         isCreatin: selectors.getIsCreatingAnnouncement(state),
     }),
 )(
     reduxForm({
         form: 'newAnnouncementForm',
-        onSubmit(values, dispatch){
-            console.log(values);
+        onSubmit(values, dispatch , { match }){
+            dispatch(
+                actions.startAddingAnnouncement({
+                    courseId: match.params.id,
+                    announcement: values,
+                })
+            )
+
+            console.log(match.params.id, values)
         },
         validate(values) {
             const error = {};
             if(!values.title) {
                 error.title='No se puede dejar el título en blanco';
-            } else if(!values.description) {
-                error.deadline='No se puede dejar la descripción en blanco';
+            } else if(!values.body) {
+                error.deadline='No se puede dejar el cuerpo del mensaje en blanco';
             }
         }
     })(NewAnnouncementForm)

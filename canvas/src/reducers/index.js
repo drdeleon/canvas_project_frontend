@@ -68,3 +68,4 @@ export const getIsFetchingAnnouncement = state => announcementSelectors.getIsFet
 export const getIsCreatingAnnouncement = state => announcementSelectors.getIsCreatingAnnouncement(state.announcement);
 export const getIsRemovingAnnouncement = state => announcementSelectors.getIsRemovingAnnouncement(state.announcement);
 export const getAnnouncementError = state => announcementSelectors.getAnnouncementError(state.announcement);
+export const getSelectedAnnouncement = state => announcementSelectors.getSelectedAnnouncement(state.announcement);

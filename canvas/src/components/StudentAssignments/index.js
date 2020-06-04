@@ -26,6 +26,12 @@ const StudentAssignments = ({ assignments, isLoading, onLoad }) => {
             {
                 assignments.length > 0 && !isLoading && (
                     <table>
+                        <thead className='table-header'>
+                            <th>Nombre</th>
+                            <th>Curso</th>
+                            <th>Fecha</th>
+                            <th>Puntos</th>
+                        </thead>
                         <tbody>
                             {
                                 assignments.map(({ id }) => 

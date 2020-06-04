@@ -4,9 +4,10 @@ import { watchLoginStarted, watchRefreshTokenStarted } from './auth';
 import { watchCoursesFetch } from './courses';
 import 
 { 
-    watchFetchAnnouncements, 
+    watchFetchAnnouncements,
+    watchFetchAnnouncement, 
+    watchAddAnnouncement,
     watchRemoveAnnouncement, 
-    watchAddAnnouncement
 } from './announcements';
 import {
     watchAssignmentsFetch,
@@ -31,6 +32,7 @@ function* mainSaga() {
         
         //announcements
         fork(watchFetchAnnouncements),
+        fork(watchFetchAnnouncement),
         fork(watchRemoveAnnouncement),
         fork(watchAddAnnouncement),
         

@@ -5,12 +5,12 @@ import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/announcements';
 
-const AannouncementRow = ({ title, course, description }) => (
+const AannouncementRow = ({ title, course, body }) => (
     <Fragment>
         <tr>
             <td>{ title }</td>
             <td>{ course }</td>
-            <td>{ description }</td>
+            <td>{ body }</td>
             <td>
                 {/* <button //onClick={seeAssignment}
                 >
