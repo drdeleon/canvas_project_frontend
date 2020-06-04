@@ -9,14 +9,14 @@ import CourseNavbar from '../../components/CourseNavbar';
 
 import './styles.css'
 
-const Course = ({ match, course, user }) => {
+const CourseScreen = ({ match, course, user }) => {
     
     return (
         <Fragment>
             <div className='route-screen'>
                 <NavBar />
                 <div className="course-container">
-                    <div className="header"> {user.username} </div>
+                    <div className="header"> {course.name} - {user.username} </div>
                     <div className="course-data">
                         <CourseNavbar id={course.id} />
                         <div className="course-description">
@@ -36,4 +36,4 @@ export default connect(
         user: selectors.getLoggedUser(state),
     }),
     dispatch => ({}),
-    )(Course);
+    )(CourseScreen);

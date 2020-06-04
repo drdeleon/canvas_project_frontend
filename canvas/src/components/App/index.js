@@ -19,7 +19,10 @@ import Account from '../../screens/Account';
 import Dashboard from '../../screens/Dashboard';
 import CoursesScreen from '../../screens/CoursesScreen';
 import UserType from '../../screens/UserType';
-import Course from '../../screens/Course';
+import CourseScreen from '../../screens/CourseScreen';
+import CourseGroupsScreen from '../../screens/CourseGroupsScreen';
+import CourseAnnouncementsScreen from '../../screens/CourseAnnouncementsScreen';
+import CourseAssignmentsScreen from '../../screens/CourseAssignmentsScreen';
 
 export const history = createBrowserHistory();
 
@@ -35,7 +38,10 @@ const App = () => (
             <Route exact path='/user-type' component={UserType} />
             <Route exact path='/account' component={Account} />
             <Route exact path='/courses' component={CoursesScreen} />
-            <Route path='/courses/:id' component={Course} />
+            <Route exact path='/courses/:id' component={CourseScreen} />
+            <Route path='/courses/:id/groups' component={CourseGroupsScreen} />
+            <Route path='/courses/:id/announcements' component={CourseAnnouncementsScreen} />
+            <Route path='/courses/:id/assignments' component={CourseAssignmentsScreen} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/assignments' component={AssignmentsList} />
             <Route exact path='/new-assignment' component={NewAssignmentForm} />
