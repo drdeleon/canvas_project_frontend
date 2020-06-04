@@ -36,8 +36,8 @@ const AnnouncementsList = ({ announcements, isLoading, onLoad }) => {
                             {
                                 announcements.map(({ id }) => 
                                     <AnnouncementRow 
-                                        key={id} 
-                                        id={id} 
+                                        key={ id } 
+                                        id={ id } 
                                     />
                                 )
                             }

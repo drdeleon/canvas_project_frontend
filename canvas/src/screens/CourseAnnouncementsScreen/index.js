@@ -43,6 +43,11 @@ const CourseAnnouncementsScreen = ({ match, course, user, isLoading, onLoad, ann
                                 {
                                     announcements.length > 0 && !isLoading && (
                                         <table>
+                                            <thead className='table-header'>
+                                                <th>Título</th>
+                                                <th>Curso</th>
+                                                <th>Mensaje</th>
+                                            </thead>
                                             <tbody>
                                                 {
                                                     announcements.map(({ id }) => 
@@ -57,7 +62,7 @@ const CourseAnnouncementsScreen = ({ match, course, user, isLoading, onLoad, ann
                                     )
                                 }
                                 {
-                                    !isLoading && (
+                                    !isLoading && userType !== 0 && (
                                         <Link to={`/courses/${course.id}/new-announcement`} exact>
                                             <button className='up'>
                                                 {'Crear Anuncio'}

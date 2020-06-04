@@ -59,7 +59,7 @@ const order = (state = [], action) => {
     switch (action.type) {
         case types.ANNOUNCEMENTS_FETCH_COMPLETED:
             {
-                return union(action.payload.id);
+                return union(action.payload.order);
             }
 
         case types.ANNOUNCEMENT_ADD_COMPLETED:

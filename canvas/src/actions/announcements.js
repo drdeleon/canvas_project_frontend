@@ -1,5 +1,6 @@
 import * as types from '../types/announcements';
 import { announcement } from '../schemas/announcements';
+
 // COURSE ANNOUNCEMENTS FETCH
 export const startFetchingAnnouncements = (courseId) => ({
     type: types.ANNOUNCEMENTS_FETCH_STARTED,

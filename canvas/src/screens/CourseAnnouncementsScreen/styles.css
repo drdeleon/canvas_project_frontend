@@ -43,6 +43,7 @@
 }
 
 .up {
+    margin-top: 25px;
     background-color:  transparent;
     color: rgb(49, 162, 100);
     border-color: rgb(49, 162, 100);
