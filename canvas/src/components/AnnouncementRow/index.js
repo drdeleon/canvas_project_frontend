@@ -28,15 +28,14 @@ export default connect(
         announcmenet: selectors.getAnnouncement(state, id),
     }),
     (dispatch, { id }) => ({
-        onDelete(course, title) {
-            dispatch(actions.startRemovingAnnouncement(course, title));
+        onDelete(course, id) {
+            dispatch(actions.startRemovingAnnouncement(course, id));
         },
     }),
     (stateProps, dispatchProps, ownProps) => ({
         ...stateProps,
         onDelete() {
-            dispatchProps.onDelete(stateProps.announcmenet.course, stateProps.announcmenet.title);
-            console.log(stateProps.announcmenet.course, stateProps.announcmenet.title, stateProps.announcmenet.id)
+            dispatchProps.onDelete(stateProps.announcmenet.course, stateProps.announcmenet.id);
         }
     })
 )(AannouncementRow);

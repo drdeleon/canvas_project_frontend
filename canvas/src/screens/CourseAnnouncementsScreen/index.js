@@ -19,7 +19,11 @@ const CourseAnnouncementsScreen = ({ match, course, user, isLoading, onLoad, ann
             <div className='route-screen'>
                 <NavBar />
                 <div className="course-container">
-                    <div className="header"> {user.username.toUpperCase()} </div>
+                    {
+                        user && (
+                            <div className="header"> {user.username.toUpperCase()} </div>
+                        )
+                    }
                     <div className="course-data">
                         <CourseNavbar id={course.id} />
                         <div className="course-description">
