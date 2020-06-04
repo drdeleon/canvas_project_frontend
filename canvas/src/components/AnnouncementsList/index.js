@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import './styles.css';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/announcements';
 import AnnouncementRow from '../AnnouncementRow';
