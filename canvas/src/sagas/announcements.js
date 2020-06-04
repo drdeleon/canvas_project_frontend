@@ -131,7 +131,6 @@ function* addAnnouncement(action) {
                         jsonResult,
                     ),
                 );
-                console.log('creado :)') 
             } else {
                 const { non_field_errors } = yield response.json();
                 yield put(authActions.failLogin(non_field_errors[0]));
@@ -151,13 +150,14 @@ export function* watchAddAnnouncement() {
 
 function* removeAnnouncement (action) {
     try {
+        console.log(action.payload)
         const isAuth = yield select(selectors.getIsAuthenticated);
 
         if (isAuth) {
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/course/${action.payload.courseId}/delete-announcement/`, {
+                `${API_BASE_URL}/courses/${action.payload.courseId}/delete-announcement/${action.payload.title}/`, {
                     method: 'DELETE',
                     body: JSON.stringify(action.payload.title),
                     headers: {
@@ -166,8 +166,9 @@ function* removeAnnouncement (action) {
                     },
                 }
             );
-
+            console.log('RESPUESTA PAPI ', response.json())
             if (response.status >= 200 && response.status <= 299) {
+                console.log('entra?')
                 yield put(actions.completeRemovingAnnouncement());
             } else {
                 const { non_field_errors } = yield response.json();
@@ -182,7 +183,7 @@ function* removeAnnouncement (action) {
 
 export function* watchRemoveAnnouncement() {
     yield takeEvery (
-        types.ANNOUNCEMENT_REMOVE_FAILED,
+        types.ANNOUNCEMENT_REMOVE_STARTED,
         removeAnnouncement
     );
 };
