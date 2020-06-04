@@ -1,15 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
-// import * as actions from '../../actions/courses';
+import * as actions from '../../actions/assignments';
 
 import CourseNavbar from '../../components/CourseNavbar';
+import AssignmentRow from '../../components/AssignmentRow';
 
 import './styles.css'
 
-const CourseAssignmentsScreen = ({ match, course, user }) => {
+const CourseAssignmentsScreen = ({ match, assignments, course, isLoading, user, onLoad }) => {
+    useEffect(onLoad, []);
+
+    console.log("assignments",assignments);
     
     return (
         <Fragment>
@@ -20,8 +24,37 @@ const CourseAssignmentsScreen = ({ match, course, user }) => {
                     <div className="course-data">
                         <CourseNavbar id={course.id} />
                         <div className="course-description">
-                            <div className='course-header'> Tareas </div>
-                            <div className='course-text'> Ciclo {course.cicle} - {course.year}</div>
+                            <Fragment>
+                                {
+                                    assignments.length === 0 && !isLoading && (
+                                        <p>
+                                            <strong>{'No hay tareas asignadas'}</strong>
+                                        </p>
+                                    )
+                                }
+                                {
+                                    // Cambiar esto con un spinner
+                                    isLoading && (
+                                        <p>{'Cargando'}</p>
+                                    )
+                                }
+                                {
+                                    assignments.length > 0 && !isLoading && (
+                                        <table>
+                                            <tbody>
+                                                {
+                                                    assignments.map(({ id }) => 
+                                                        <AssignmentRow 
+                                                            key={id} 
+                                                            id={id} 
+                                                        />
+                                                    )
+                                                }
+                                            </tbody>
+                                        </table>
+                                    )
+                                }
+                            </Fragment>
                         </div>
                     </div>
                 </div>
@@ -33,7 +66,13 @@ const CourseAssignmentsScreen = ({ match, course, user }) => {
 export default connect(
     (state, { match }) => ({
         course: selectors.getCourse(state, match.params.id),
+        assignments: selectors.getAssignments(state),
+        isLoading: selectors.getIsFetchingAssignments(state),
         user: selectors.getLoggedUser(state),
     }),
-    dispatch => ({}),
+    (dispatch, { match }) => ({
+        onLoad(){
+            dispatch(actions.startFetchingCourseAssignments(match.params.id));
+        }
+    }),
     )(CourseAssignmentsScreen);

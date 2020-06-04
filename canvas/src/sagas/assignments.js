@@ -209,7 +209,7 @@ function* fetchCourseAssignments(action) {
 
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/courses/${action.payload.courseId}/assignments/`, {
+                `${API_BASE_URL}/courses/${action.payload}/assignments/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -224,7 +224,6 @@ function* fetchCourseAssignments(action) {
                     entities: { assignments },
                     result,
                 } = normalize(jsonResult, schemas.assignments);
-
 
                 yield put(actions.completeFetchingCourseAssignments(assignments, result));
             } else {

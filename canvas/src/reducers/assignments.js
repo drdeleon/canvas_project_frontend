@@ -94,6 +94,7 @@ const byId = (state = {}, action) => {
 const order = (state = [], action) => {
     switch (action.type) {
         case types.ASSIGNMENTS_FETCH_COMPLETED:
+        case types.COURSE_ASSIGNMENTS_FETCH_COMPLETED:
             {
                 return union(action.payload.order);
             }
@@ -130,6 +131,7 @@ const selected = (state = null, action) => {
 const isFetching = (state = false, action) => {
     switch (action.type) {
         case types.ASSIGNMENTS_FETCH_COMPLETED:
+        case types.COURSE_ASSIGNMENTS_FETCH_COMPLETED:
         case types.ASSIGNMENTS_FETCH_FAILED:
             {
                 return false;
