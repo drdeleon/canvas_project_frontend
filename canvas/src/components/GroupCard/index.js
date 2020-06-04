@@ -12,10 +12,10 @@ const GroupCard = ({ id, name }) => {
         <Fragment>
             <div key={id}>
             {/* <Link to={`courses/${id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}> */}
-                <div className='course-card-container'>
-                        <img className='course-card-img' src="" alt=""/>
-                        <div className='course-card-footer'>
-                            <div className='course-card-name'> {name} </div>
+                <div className='course-gp-card-container'>
+                        <img className='course-gp-card-img' src="" alt=""/>
+                        <div className='course-gp-card-footer'>
+                            <div className='course-gp-card-name'> {name} </div>
                         </div>
                 </div>
             {/* </Link> */}

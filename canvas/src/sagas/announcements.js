@@ -150,25 +150,22 @@ export function* watchAddAnnouncement() {
 
 function* removeAnnouncement (action) {
     try {
-        console.log(action.payload)
         const isAuth = yield select(selectors.getIsAuthenticated);
 
         if (isAuth) {
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/courses/${action.payload.courseId}/delete-announcement/${action.payload.title}/`, {
+                `${API_BASE_URL}/announcements/${action.payload.id}`, {
                     method: 'DELETE',
-                    body: JSON.stringify(action.payload.title),
+                    body: JSON.stringify(action.payload.id),
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `JWT ${token}`,
                     },
                 }
             );
-            console.log('RESPUESTA PAPI ', response.json())
             if (response.status >= 200 && response.status <= 299) {
-                console.log('entra?')
                 yield put(actions.completeRemovingAnnouncement());
             } else {
                 const { non_field_errors } = yield response.json();
