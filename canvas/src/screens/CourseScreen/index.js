@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import NavBar from '../../components/NavBar';
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/courses';
+// import * as actions from '../../actions/courses';
 
 import CourseNavbar from '../../components/CourseNavbar';
 
 import './styles.css'
 
-const Course = ({ match, course, user }) => {
+const CourseScreen = ({ match, course, user }) => {
     
     return (
         <Fragment>
@@ -18,12 +18,11 @@ const Course = ({ match, course, user }) => {
                 <div className="course-container">
                     <div className="header"> {course.name} - {user.username} </div>
                     <div className="course-data">
-                    <CourseNavbar id={course.id} />
-                    <div className="course-description">
-                        <div>{course.name}</div>
-                        <div>{course.cicle}</div>
-                        <div>{course.year}</div>
-                    </div>
+                        <CourseNavbar id={course.id} />
+                        <div className="course-description">
+                            <div className='course-header'> Página Principal de {course.name}</div>
+                            <div className='course-text'> Ciclo {course.cicle} - {course.year}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,4 +36,4 @@ export default connect(
         user: selectors.getLoggedUser(state),
     }),
     dispatch => ({}),
-    )(Course);
+    )(CourseScreen);

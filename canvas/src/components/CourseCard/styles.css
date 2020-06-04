@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 14rem;
-    height: 12rem;
+    width: 16rem;
+    height: 14rem;
     background-color: rgb(103, 220, 111);
     border-radius: 0.25rem;
     box-shadow: 1px 1px 5px #888888;
+    margin: 1rem;
 }
 
 .course-card-container:hover {
@@ -14,8 +15,13 @@
 }
 
 .course-card-name {
-    font-size: x-large;
+    white-space: nowrap;
+    width: fill-available;
+    text-align: center;
+    font-size: large;
     padding-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .course-card-info {

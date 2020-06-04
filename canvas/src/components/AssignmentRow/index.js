@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/assignment';
+import * as actions from '../../actions/assignments';
 
 const AssignmentRow = ({ title, course, deadline, score }) => (
     <Fragment>

@@ -5,7 +5,8 @@ import * as selectors from '../../reducers';
 import * as actions from '../../actions/assignments';
 import AssignmentRow from '../AssignmentRow';
 
-const AssignmentsList = ({ assignments, isLoading, onLoad }) => {
+const StudentAssignments = ({ assignments, isLoading, onLoad }) => {
+    useEffect(onLoad, []);
 
     return (
         <Fragment>
@@ -25,12 +26,6 @@ const AssignmentsList = ({ assignments, isLoading, onLoad }) => {
             {
                 assignments.length > 0 && !isLoading && (
                     <table>
-                        <thead className='table-header'>
-                            <th>Nombre</th>
-                            <th>Curso</th>
-                            <th>Fecha</th>
-                            <th>Puntos</th>
-                        </thead>
                         <tbody>
                             {
                                 assignments.map(({ id }) => 
@@ -54,6 +49,8 @@ export default connect (
         isLoading: selectors.getIsFetchingAssignments(state),
     }),
     dispatch => ({
-
+        onLoad() {
+            dispatch(actions.startFetchingAssignments());
+        },
     }),
-)(AssignmentsList);
+)(StudentAssignments);

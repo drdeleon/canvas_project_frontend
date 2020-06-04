@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import auth, * as authSelectors from './auth';
 import userType, * as userTypeSelectors from './userType';
-import assignment, * as assignmentsSelectors from './assignment';
+import assignments, * as assignmentsSelectors from './assignments';
 import navbar, * as navbarSelectors from './navbar';
 import courses, * as coursesSelectors from './courses';
 import announcement, * as announcementSelectors from './announcement';
@@ -12,7 +12,7 @@ const reducer = combineReducers({
     //reductores
     auth,
     userType,
-    assignment,
+    assignments,
     navbar,
     courses,
     announcement,
@@ -38,15 +38,16 @@ export const getRefreshingError = state => authSelectors.getRefreshingError(stat
 export const getSelectedUserType = state => userTypeSelectors.getSelectedUserType(state.userType);
 
 //  ASSIGNMENT SELECTORS
-export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignment, id);
-export const getAssignments = state => assignmentsSelectors.getAssignments(state.assignment);
-export const getIsFetchingAssignments = state => assignmentsSelectors.getIsFetchingAssignments(state.assignment);
-export const getIsCreatingAssignment = state => assignmentsSelectors.getIsCreatingAssignment(state.assignment);
-export const getIsRemovingAssignment = state => assignmentsSelectors.getIsRemovingAssignment(state.assignment);
-export const getIsEdittingAssignment = state => assignmentsSelectors.getIsEdittingAssignment(state.assignment);
-export const getIsScoringAssignment = state => assignmentsSelectors.getIsScoringAssignment(state.assignment);
-export const getIsSubmittingAssignment = state => assignmentsSelectors.getIsSubmittingAssignment(state.assignment);
-export const getAssignmentError = state => assignmentsSelectors.getAssignmentError(state.assignment);
+export const getAssignment = (state, id) => assignmentsSelectors.getAssignment(state.assignments, id);
+export const getAssignments = state => assignmentsSelectors.getAssignments(state.assignments);
+export const getIsFetchingAssignments = state => assignmentsSelectors.getIsFetchingAssignments(state.assignments);
+export const getIsCreatingAssignment = state => assignmentsSelectors.getIsCreatingAssignment(state.assignments);
+export const getIsRemovingAssignment = state => assignmentsSelectors.getIsRemovingAssignment(state.assignments);
+export const getIsEdittingAssignment = state => assignmentsSelectors.getIsEdittingAssignment(state.assignments);
+export const getIsScoringAssignment = state => assignmentsSelectors.getIsScoringAssignment(state.assignments);
+export const getIsSubmittingAssignment = state => assignmentsSelectors.getIsSubmittingAssignment(state.assignments);
+export const getAssignmentError = state => assignmentsSelectors.getAssignmentError(state.assignments);
+export const getSelectedAssignment = state => assignmentsSelectors.getSelectedAssignment(state.assignments);
 
 // NAVBAR SELECTORS
 export const getSelectedNavbarElement = state => navbarSelectors.getSelectedNavbarElement(state.navbar);

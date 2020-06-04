@@ -85,103 +85,125 @@ export function* watchCoursesFetch() {
     );
 };
 
-// function* addCourse(action) {
-//     try {
-//         const isAuth = yield select(selectors.isAuthenticated);
+function* addCourse(action) {
+    try {
+        const isAuth = yield select(selectors.getIsAuthenticated);
 
-//         if (isAuth) {
-//             const token = yield select(selectors.getAuthToken);
-//             const response = yield call(
-//                 fetch,
-//                 `${API_BASE_URL}/owners/`, {
-//                     method: 'POST',
-//                     body: JSON.stringify(action.payload),
-//                     headers: {
-//                         'Content-Type': 'application/json',
-//                         'Authorization': `JWT ${token}`,
-//                     },
-//                 }
-//             );
+        if (isAuth) {
+            const token = yield select(selectors.getAuthToken);
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/courses/`, {
+                    method: 'POST',
+                    body: JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
 
-//             if (response.status === 201) {
-//                 const jsonResult = yield response.json();
-//                 yield put(
-//                     actions.completeAddingCourse(
-//                         action.payload.id,
-//                         jsonResult,
-//                     ),
-//                 );
-//                 // const {
-//                 //   entities: { studentCourses },
-//                 //   result,
-//                 // } = normalize(jsonResult, schemas.studentCourses);
+            if (response.status >= 200 && response.status <= 299) {
+                const jsonResult = yield response.json();
+                yield put(
+                    actions.completeAddingCourse(
+                        action.payload.id,
+                        jsonResult,
+                    ),
+                );
+            } else {
+                const { non_field_errors } = yield response.json();
+                yield put(authActions.failLogin(non_field_errors[0]));
+            }
+        }
+    } catch (error) {
+        yield put(authActions.failLogin('Error en la conexión.'));
+    }
+};
 
-//                 // yield put(
-//                 //   actions.completeFetchingstudentCourses(
-//                 //     studentCourses,
-//                 //     result,
-//                 //   ),
-//                 // );
-//             } else {
-//                 // const { non_field_errors } = yield response.json();
-//                 // yield put(actions.failLogin(non_field_errors[0]));
-//             }
-//         }
-//     } catch (error) {
-//         // yield put(actions.failLogin('Falló horrible la conexión mano'));
-//     }
-// };
+export function* watchAddCourse() {
+    yield takeEvery(
+        types.COURSE_ADD_STARTED,
+        addCourse,
+    );
+};
 
-// export function* watchAddCourse() {
-//     yield takeEvery(
-//         types.STUDENT_COURSE_ADD_STARTED,
-//         addCourse,
-//     );
-// };
+function* removeCourse(action) {
+    try {
+        const isAuth = yield select(selectors.getIsAuthenticated);
 
-// function* removeCourse(action) {
-//     try {
-//         const isAuth = yield select(selectors.isAuthenticated);
+        if (isAuth) {
+            const token = yield select(selectors.getAuthToken);
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/courses/${action.payload.id}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
 
-//         if (isAuth) {
-//             const token = yield select(selectors.getAuthToken);
-//             const response = yield call(
-//                 fetch,
-//                 `${API_BASE_URL}/owners/${action.payload.id}/`, {
-//                     method: 'DELETE',
-//                     headers: {
-//                         'Content-Type': 'application/json',
-//                         'Authorization': `JWT ${token}`,
-//                     },
-//                 }
-//             );
+            if (response.status >= 200 && response.status <= 299) {
+                yield put(actions.completeRemovingCourse());
+            } else {
+                const { non_field_errors } = yield response.json();
+                yield put(authActions.failLogin(non_field_errors[0]));
+            }
+        }
+    } catch (error) {
+        yield put(authActions.failLogin('Error en la conexión'));
+    }
+};
 
-//             if (response.status === 200) {
-//                 yield put(actions.completeRemovingCourse());
-//                 // const {
-//                 //   entities: { studentCourses },
-//                 //   result,
-//                 // } = normalize(jsonResult, schemas.studentCourses);
+export function* watchRemoveCourse() {
+    yield takeEvery(
+        types.COURSE_REMOVE_STARTED,
+        removeCourse,
+    );
+};
 
-//                 // yield put(
-//                 //   actions.completeFetchingstudentCourses(
-//                 //     studentCourses,
-//                 //     result,
-//                 //   ),
-//                 // );
-//             } else {
-//                 // const { non_field_errors } = yield response.json();
-//                 // yield put(actions.failLogin(non_field_errors[0]));
-//             }
-//         }
-//     } catch (error) {
-//         // yield put(actions.failLogin('Falló horrible la conexión mano'));
-//     }
-// };
 
-// export function* watchRemoveCourse() {
-//     yield takeEvery(
-//         types.STUDENT_COURSE_REMOVE_STARTED,
-//         removeCourse,
-//     );
-// };
+// EDIT COURSE
+function* editCourse(action) {
+    try {
+        const isAuth = yield select(selectors.getIsAuthenticated);
+
+        if (isAuth) {
+            const token = yield select(selectors.getAuthToken);
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/courses/${action.payload.id}/`, {
+                    method: 'PATCH',
+                    body: JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
+
+            if (response.status >= 200 && response.status <= 299) {
+                const jsonResult = yield response.json();
+                yield put(
+                    actions.completeEditingCourse(
+                        jsonResult,
+                    ),
+                );
+            } else {
+                const { non_field_errors } = yield response.json();
+                yield put(authActions.failLogin(non_field_errors[0]));
+            }
+        }
+    } catch (error) {
+        yield put(authActions.failLogin('Error en la conexión.'));
+    }
+};
+
+export function* watchEditCourse() {
+    yield takeEvery(
+        types.COURSE_EDIT_STARTED,
+        editCourse,
+    );
+};
