@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './styles.css';
+import * as actions from '../../actions/establishments';
+import * as selectors from '../../reducers';
 
 const CourseCard = ({ id, name, section, year, cicle }) => {
-
 
     return (
         <Fragment>
@@ -26,6 +27,8 @@ const CourseCard = ({ id, name, section, year, cicle }) => {
 };
 
 export default connect(
-    state => ({}),
-    dispatch => ({}),
+    state => ({
+    }),
+    (dispatch) => ({
+    }),
     )(CourseCard);

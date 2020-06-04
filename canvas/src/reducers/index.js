@@ -7,12 +7,14 @@ import assignments, * as assignmentsSelectors from './assignments';
 import navbar, * as navbarSelectors from './navbar';
 import courses, * as coursesSelectors from './courses';
 import announcement, * as announcementSelectors from './announcement';
+import establishments, * as establishmentsSelectors from './establishments';
 
 const reducer = combineReducers({
     //reductores
     auth,
     userType,
     assignments,
+    establishments,
     navbar,
     courses,
     announcement,
@@ -69,3 +71,8 @@ export const getIsCreatingAnnouncement = state => announcementSelectors.getIsCre
 export const getIsRemovingAnnouncement = state => announcementSelectors.getIsRemovingAnnouncement(state.announcement);
 export const getAnnouncementError = state => announcementSelectors.getAnnouncementError(state.announcement);
 export const getSelectedAnnouncement = state => announcementSelectors.getSelectedAnnouncement(state.announcement);
+
+// ESTABLISHMENTS SELECTORS
+export const getIsFetchingEstablishments = state => establishmentsSelectors.getIsFetchingEstablishments(state.establishments);
+export const getCurrentEstablishment = state => establishmentsSelectors.getCurrentEstablishment(state.establishments);
+export const getEstablishmentsError = state => establishmentsSelectors.getEstablishmentsError(state.establishments);
