@@ -109,7 +109,6 @@ function* addAnnouncement(action) {
         const isAuth = yield select(selectors.getIsAuthenticated);
         
         if (isAuth) {
-            console.log(action.payload)
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
@@ -156,20 +155,21 @@ function* removeAnnouncement (action) {
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/announcements/${action.payload.id}`, {
+                `${API_BASE_URL}/announcements/${action.payload.id}/`, {
                     method: 'DELETE',
-                    body: JSON.stringify(action.payload.id),
+                    // body: JSON.stringify(action.payload.id),
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `JWT ${token}`,
                     },
                 }
             );
+            console.log(response.json());
             if (response.status >= 200 && response.status <= 299) {
                 yield put(actions.completeRemovingAnnouncement());
             } else {
                 const { non_field_errors } = yield response.json();
-                yield put(authActions.failLogin(non_field_errors[0]));
+                // yield put(authActions.failLogin(non_field_errors[0]));
             }
         }
 

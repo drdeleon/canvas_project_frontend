@@ -4,17 +4,17 @@ import {
     put,
     // race,
     // all,
-    delay,
+    // delay,
     select,
 } from 'redux-saga/effects';
-import { normalize } from 'normalizr';
+// import { normalize } from 'normalizr';
 
 import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
 import * as actions from '../actions/establishments';
 import * as authActions from '../actions/auth';
 import * as types from '../types/establishments';
-import * as schemas from '../schemas/establishments';
+// import * as schemas from '../schemas/establishments';
 
 
 // FETCH ASSIGNMENT
@@ -23,7 +23,6 @@ function* fetchEstablishment(action) {
         const isAuth = yield select(selectors.getIsAuthenticated);
 
         if (isAuth) {
-            console.log("ACAAA");
 
             const token = yield select(selectors.getAuthToken);
 

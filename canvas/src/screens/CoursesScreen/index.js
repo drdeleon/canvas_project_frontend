@@ -1,8 +1,5 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-
-import * as selectors from '../../reducers';
-import * as actions from '../../actions/courses';
 
 import './styles.css';
 

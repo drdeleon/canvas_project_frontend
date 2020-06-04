@@ -40,10 +40,12 @@ const CourseAssignmentsScreen = ({ match, assignments, course, isLoading, user, 
                                     assignments.length > 0 && !isLoading && (
                                         <table>
                                             <thead className='table-header'>
-                                                <th>Nombre</th>
-                                                <th>Curso</th>
-                                                <th>Fecha</th>
-                                                <th>Puntos</th>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Curso</th>
+                                                    <th>Fecha</th>
+                                                    <th>Puntos</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                                 {

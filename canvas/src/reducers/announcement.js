@@ -1,9 +1,8 @@
-import { combineReducers, bindActionCreators } from 'redux';
+import { combineReducers } from 'redux';
 import omit from 'lodash/omit';
 import union from 'lodash/union';
 
 import * as types from '../types/announcements';
-import { getAssignments } from './assignments';
 
 /*
     FORMA REDUCTOR:

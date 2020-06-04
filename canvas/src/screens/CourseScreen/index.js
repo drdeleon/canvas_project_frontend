@@ -12,9 +12,6 @@ import './styles.css'
 const CourseScreen = ({ match, course, user, fetchEstablishment, establishment }) => {
     useEffect(fetchEstablishment, []);
 
-    console.log(establishment);
-    
-    
     return (
         <Fragment>
             <div className='route-screen'>
