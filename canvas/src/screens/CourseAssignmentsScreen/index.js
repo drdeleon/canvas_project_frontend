@@ -12,8 +12,6 @@ import './styles.css'
 
 const CourseAssignmentsScreen = ({ match, assignments, course, isLoading, user, onLoad }) => {
     useEffect(onLoad, []);
-
-    console.log("assignments",assignments);
     
     return (
         <Fragment>
