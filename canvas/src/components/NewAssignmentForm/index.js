@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, Form, formValueSelector } from 'redux-form';
 
 import './styles.css';
-import * as actions from '../../actions/assignment';
+import * as actions from '../../actions/assignments';
 import * as selectors from '../../reducers';
 
 const renderInput = ({ input, label, type, className, meta: { touched, error } }) => (

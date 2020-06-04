@@ -5,7 +5,8 @@ import * as selectors from '../../reducers';
 import * as actions from '../../actions/assignments';
 import AssignmentRow from '../AssignmentRow';
 
-const AssignmentsList = ({ assignments, isLoading, onLoad }) => {
+const StudentAssignments = ({ assignments, isLoading, onLoad }) => {
+    useEffect(onLoad, []);
 
     return (
         <Fragment>
@@ -48,6 +49,8 @@ export default connect (
         isLoading: selectors.getIsFetchingAssignments(state),
     }),
     dispatch => ({
-
+        onLoad() {
+            dispatch(actions.startFetchingAssignments());
+        },
     }),
-)(AssignmentsList);
+)(StudentAssignments);

@@ -17,7 +17,7 @@ import NewAssignmentForm from '../NewAssignmentForm';
 
 import Account from '../../screens/Account';
 import Dashboard from '../../screens/Dashboard';
-import Courses from '../../screens/Courses';
+import CoursesScreen from '../../screens/CoursesScreen';
 import UserType from '../../screens/UserType';
 import Course from '../../screens/Course';
 
@@ -34,7 +34,7 @@ const App = () => (
             <Route exact path='/login' component={LogIn} />
             <Route exact path='/user-type' component={UserType} />
             <Route exact path='/account' component={Account} />
-            <Route exact path='/courses' component={Courses} />
+            <Route exact path='/courses' component={CoursesScreen} />
             <Route path='/courses/:id' component={Course} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/assignments' component={AssignmentsList} />

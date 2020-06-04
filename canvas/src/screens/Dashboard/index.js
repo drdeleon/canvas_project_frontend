@@ -2,20 +2,28 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import NavBar from '../../components/NavBar';
+import StudentAssignments from '../../components/StudentAssignments';
+import Courses from '../../components/Courses';
 
-const Dashboard = ({}) => {
+import * as selectors from '../../reducers';
+import * as actions from '../../actions/assignments';
 
-    const divStyle = {
-        display: 'flex',
-        flexDirection: 'row',
-      };
+import './styles.css';
+
+
+const Dashboard = ({ userType }) => {
 
     return (
         <Fragment>
-            <div style={divStyle}>
+            <div className='route-screen'>
                 <NavBar />
-                <div>
-                    <h1> Dashboard </h1>
+                <div className="dashboard-data">
+                    <div className='header'> TABLERO </div>
+                    {
+                        userType===0 ?
+                        <StudentAssignments/>
+                        : <Courses />
+                    }
                 </div>
             </div>
         </Fragment>
@@ -23,6 +31,8 @@ const Dashboard = ({}) => {
 };
 
 export default connect(
-    state => ({}),
+    state => ({
+        userType: selectors.getSelectedUserType(state),
+    }),
     dispatch => ({}),
     )(Dashboard);
