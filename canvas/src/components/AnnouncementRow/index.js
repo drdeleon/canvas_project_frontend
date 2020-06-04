@@ -11,12 +11,6 @@ const AannouncementRow = ({ title, course, body }) => (
             <td>{ title }</td>
             <td>{ course }</td>
             <td>{ body }</td>
-            <td>
-                {/* <button //onClick={seeAssignment}
-                >
-                    {'Ver'}
-                </button> */}
-            </td>
         </tr>
     </Fragment>
 );

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, Form, formValueSelector } from 'redux-form';
+import { Link } from 'react-router-dom';
+
 
 import './styles.css';
 
@@ -117,13 +119,15 @@ export default connect(
         form: 'newAnnouncementForm',
         onSubmit(values, dispatch , { match }){
             dispatch(
-                actions.startAddingAnnouncement({
-                    courseId: match.params.id,
-                    announcement: values,
-                })
+                actions.startAddingAnnouncement(
+                    match.params.id,
+                    { 
+                        title: values.title,
+                        body: values.body,
+                        course: match.params.id,
+                    }
+                )
             )
-
-            console.log(match.params.id, values)
         },
         validate(values) {
             const error = {};

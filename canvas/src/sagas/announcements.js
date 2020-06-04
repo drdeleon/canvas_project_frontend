@@ -107,22 +107,22 @@ export function* watchFetchAnnouncement() {
 function* addAnnouncement(action) {
     try {
         const isAuth = yield select(selectors.getIsAuthenticated);
-        console.log(isAuth)
-
+        
         if (isAuth) {
+            console.log(action.payload)
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/announcements/`, {
+                `${API_BASE_URL}/courses/${action.payload.courseId}/create-announcement/`, {
                     method: 'POST',
-                    body: JSON.stringify(action.payload),
+                    body: JSON.stringify(action.payload.announcement),
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `JWT ${token}`,
                     },
                 }
             );
-
+            
             if (response.status >= 200 && response.status <= 299) {
                 const jsonResult = yield response.json();
                 yield put(
@@ -131,6 +131,7 @@ function* addAnnouncement(action) {
                         jsonResult,
                     ),
                 );
+                console.log('creado :)') 
             } else {
                 const { non_field_errors } = yield response.json();
                 yield put(authActions.failLogin(non_field_errors[0]));
