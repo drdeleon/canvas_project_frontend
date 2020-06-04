@@ -31,18 +31,18 @@ const byId = (state = {}, action) => {
             return newState;
         }
 
-        case types.ANNOUNCEMENT_FETCH_STARTED: {
-            const { entities, order } = action.payload;
-            const newState = {...state };
+        // case types.ANNOUNCEMENT_FETCH_STARTED: {
+        //     const { entities, order } = action.payload;
+        //     const newState = {...state };
 
-            order.forEach(id => {
-                newState[id] = {
-                    ...entities[id],
-                };
-            });
+        //     order.forEach(id => {
+        //         newState[id] = {
+        //             ...entities[id],
+        //         };
+        //     });
 
-            return newState;
-        }
+        //     return newState;
+        // }
 
         case types.ANNOUNCEMENT_ADD_COMPLETED: {
             const announcement = action.payload;

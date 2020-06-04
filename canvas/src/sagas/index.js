@@ -2,19 +2,16 @@ import { fork, all } from 'redux-saga/effects';
 
 import { watchLoginStarted, watchRefreshTokenStarted } from './auth';
 import { watchCoursesFetch } from './courses';
-// import { watchSayHappyBirthday } from './happyBirthday';
-// import { watchPetOwnersFetch, watchAddPetOwner, watchRemovePetOwner } from './petOwners';
-
+import { watchFetchAnnouncements, watchRemoveAnnouncement, watchAddAnnouncement} from './announcements';
 
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
         fork(watchRefreshTokenStarted),
         fork(watchCoursesFetch),
-        // fork(watchSayHappyBirthday),
-        // fork(watchPetOwnersFetch),
-        // fork(watchAddPetOwner),
-        // fork(watchRemovePetOwner),
+        fork(watchFetchAnnouncements),
+        fork(watchRemoveAnnouncement),
+        fork(watchAddAnnouncement)
     ]);
 }
 

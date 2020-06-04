@@ -26,6 +26,11 @@ const AnnouncementsList = ({ announcements, isLoading, onLoad }) => {
             {
                 announcements.length > 0 && !isLoading && (
                     <table>
+                        <thead className='table-header'>
+                            <th>Título</th>
+                            <th>Curso</th>
+                            <th>Descripción</th>
+                        </thead>
                         <tbody>
                             {
                                 announcements.map(({ id }) => 
