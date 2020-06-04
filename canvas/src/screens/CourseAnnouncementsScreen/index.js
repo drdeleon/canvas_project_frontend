@@ -18,17 +18,13 @@ const CourseAnnouncementsScreen = ({ match, course, user, isLoading, onLoad, ann
         <Fragment>
             <div className='route-screen'>
                 <NavBar />
-                <div className="course-container">
-                    {
-                        user && (
-                            <div className="header"> {user.username.toUpperCase()} </div>
-                        )
-                    }
-                    <div className="course-data">
+                <div className="course-anncmt-container">
+                    <div className="header"> {user.username.toUpperCase()} </div>
+                    <div className="course-anncmt-data">
                         <CourseNavbar id={course.id} />
-                        <div className="course-description">
-                            <div className='course-header'> Anuncios</div>
-                            <div className='course-text'> Ciclo {course.cicle} - {course.year}</div>
+                        <div className="course-anncmt-description">
+                            <div className='course-anncmt-header'> Anuncios</div>
+                            <div className='course-anncmt-text'> Ciclo {course.cicle} - {course.year}</div>
                             <Fragment>
                                 {
                                     announcements.length === 0 && !isLoading && (
@@ -46,7 +42,7 @@ const CourseAnnouncementsScreen = ({ match, course, user, isLoading, onLoad, ann
                                 }
                                 {
                                     announcements.length > 0 && !isLoading && (
-                                        <table>
+                                        <table className='course-anncmt-table'>
                                             <thead className='table-header'>
                                                 <tr>
                                                     <th>Título</th>

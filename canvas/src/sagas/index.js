@@ -4,6 +4,14 @@ import { watchLoginStarted, watchRefreshTokenStarted } from './auth';
 import { watchCoursesFetch } from './courses';
 import { watchEstablishmentFetch } from './establishments';
 import {
+    watchGroupsFetch,
+    watchGroupFetch,
+    watchEditGroup,
+    watchRemoveGroup,
+    watchCourseGroupsFetch,
+    watchAddCourseGroup,
+} from './groups';
+import {
     watchFetchAnnouncements,
     watchFetchAnnouncement,
     watchAddAnnouncement,
@@ -18,8 +26,7 @@ import {
     watchAddCourseAssignment,
     watchRemoveCourseAssignment,
 } from './assignments';
-// import { watchSayHappyBirthday } from './happyBirthday';
-// import { watchPetOwnersFetch, watchAddPetOwner, watchRemovePetOwner } from './petOwners';
+
 
 
 function* mainSaga() {
@@ -47,6 +54,14 @@ function* mainSaga() {
         fork(watchCourseAssignmentsFetch),
         fork(watchAddCourseAssignment),
         fork(watchRemoveCourseAssignment),
+
+        // groups
+        fork(watchGroupsFetch),
+        fork(watchGroupFetch),
+        fork(watchEditGroup),
+        fork(watchRemoveGroup),
+        fork(watchCourseGroupsFetch),
+        fork(watchAddCourseGroup),
     ]);
 }
 

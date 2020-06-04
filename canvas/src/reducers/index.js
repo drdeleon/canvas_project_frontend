@@ -8,6 +8,7 @@ import navbar, * as navbarSelectors from './navbar';
 import courses, * as coursesSelectors from './courses';
 import announcement, * as announcementSelectors from './announcement';
 import establishments, * as establishmentsSelectors from './establishments';
+import groups, * as groupsSelectors from './groups';
 
 const reducer = combineReducers({
     //reductores
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     userType,
     assignments,
     establishments,
+    groups,
     navbar,
     courses,
     announcement,
@@ -76,3 +78,13 @@ export const getSelectedAnnouncement = state => announcementSelectors.getSelecte
 export const getIsFetchingEstablishments = state => establishmentsSelectors.getIsFetchingEstablishments(state.establishments);
 export const getCurrentEstablishment = state => establishmentsSelectors.getCurrentEstablishment(state.establishments);
 export const getEstablishmentsError = state => establishmentsSelectors.getEstablishmentsError(state.establishments);
+
+// GROUPS SELECTORS
+export const getGroup = (state, id) => groupsSelectors.getGroup(state.groups, id);
+export const getGroups = state => groupsSelectors.getGroups(state.groups);
+export const getIsFetchingGroups = state => groupsSelectors.getIsFetchingGroups(state.groups);
+export const getIsCreatingGroup = state => groupsSelectors.getIsCreatingGroup(state.groups);
+export const getIsRemovingGroup = state => groupsSelectors.getIsRemovingGroup(state.groups);
+export const getIsEditingGroup = state => groupsSelectors.getIsEditingGroup(state.groups);
+export const getGroupError = state => groupsSelectors.getGroupError(state.groups);
+export const getSelectedGroup = state => groupsSelectors.getSelectedGroup(state.groups);
