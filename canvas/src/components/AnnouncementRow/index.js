@@ -33,14 +33,8 @@ export default connect(
         userType: selectors.getSelectedUserType(state)
     }),
     (dispatch, { id }) => ({
-        onDelete(course, id) {
-            dispatch(actions.startRemovingAnnouncement(course, id));
-        },
-    }),
-    (stateProps, dispatchProps, ownProps) => ({
-        ...stateProps,
         onDelete() {
-            dispatchProps.onDelete(stateProps.announcmenet.course, stateProps.announcmenet.id);
-        }
+            dispatch(actions.startRemovingAnnouncement(id));
+        },
     })
 )(AannouncementRow);

@@ -82,6 +82,8 @@ function* fetchAnnouncement(action) {
                 }
             );
 
+            console.log(response.json());
+
             if (response.status >= 200 && response.status <= 299) {
                 const jsonResult = yield response.json();
                 yield put(actions.completeFetchingAnnouncement(jsonResult));
@@ -147,40 +149,41 @@ export function* watchAddAnnouncement() {
     );
 };
 
-function* removeAnnouncement (action) {
+function* removeAnnouncement(action) {
     try {
-        const isAuth = yield select(selectors.getIsAuthenticated);
-
-        if (isAuth) {
+         const isAuth = yield select(selectors.getIsAuthenticated);
+ 
+         if (isAuth) {
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/announcements/${action.payload.id}/`, {
+                `${API_BASE_URL}/announcements/${action.payload.id}/`,
+                {
                     method: 'DELETE',
-                    // body: JSON.stringify(action.payload.id),
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `JWT ${token}`,
                     },
                 }
             );
-            console.log(response.json());
-            if (response.status >= 200 && response.status <= 299) {
-                yield put(actions.completeRemovingAnnouncement());
+
+ 
+            if (response.status >= 200 && response.status < 299) {
+                console.log(yield put(actions.completeRemovingAnnouncement(action.payload.id)));
+                console.log('listo')
             } else {
                 const { non_field_errors } = yield response.json();
-                // yield put(authActions.failLogin(non_field_errors[0]));
+                yield put(actions.failRemovingAnnouncement(non_field_errors[0]));
             }
         }
-
     } catch (error) {
         yield put(authActions.failLogin('Error en la conexión'));
     }
 };
-
+ 
 export function* watchRemoveAnnouncement() {
     yield takeEvery (
         types.ANNOUNCEMENT_REMOVE_STARTED,
-        removeAnnouncement
+        removeAnnouncement,
     );
 };

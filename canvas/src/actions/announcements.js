@@ -64,16 +64,18 @@ export const failAddingAnnouncement = (oldId, error) => ({
 });
 
 // COURSE ANNOUNCEMENT REMOVE 
-export const startRemovingAnnouncement = (courseId, id) => ({
+export const startRemovingAnnouncement = (id) => ({
     type: types.ANNOUNCEMENT_REMOVE_STARTED,
     payload: {
-        courseId,
         id,
     },
 });
 
-export const completeRemovingAnnouncement = () => ({
+export const completeRemovingAnnouncement = (id) => ({
     type: types.ANNOUNCEMENT_REMOVE_COMPLETED,
+    payload: {
+        id,
+    }
 });
 
 export const failRemovingAnnouncement = (id, error) => ({
